@@ -7082,7 +7082,7 @@ function viewListen(v){
       <button class="round" id="slowone" aria-label="Đọc chậm câu hiện tại">${I.slow}</button>
     </div>
   </section>
-  <section class="panel stack">
+  <section class="panel stack" hidden style="display:none" aria-hidden="true">
     <div class="sec-head"><h2>Lời bài nghe</h2><button class="tx-tg" id="reveal2" aria-pressed="false">${I.eye}<span>Hiện lời</span></button></div>
     <p class="tx-hint" id="tx-hint">Lời đang ẩn để bạn tập nghe trước. Chạm vào đây hoặc bấm “Hiện lời” để xem.</p>
     <p class="transcript hide" id="tx">${sents.map((s,i)=>`<span class="sent" data-i="${i}">${s.split(/(\s+)/).map(w=>/\S/.test(w)?`<span class="w" data-w="${esc(w.replace(/[^A-Za-z'’-]/g,''))}">${esc(w)}</span>`:w).join('')}</span> `).join('')}</p>
@@ -8281,7 +8281,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v438';
+const APP_V='elocu-v439';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
