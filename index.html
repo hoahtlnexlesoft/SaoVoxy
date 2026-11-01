@@ -7600,7 +7600,7 @@ const PB_LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 function pbFlyer(v){const map=$('.mt-map',v); if(!map)return; const bean=$('.pb.cur',map), locks=$$('.pb.lock',map), twigs=[...$$('.pb-twig',map),...locks,...(bean?[bean]:[])]; if(twigs.length<2)return;
   const b=document.createElement('div'); b.className='pb-flyer'; b.innerHTML='<img class="fy-perch" src="media/sao-peck.webp" alt=""><img class="fy-fly" src="media/sao-fly.webp" alt="">'; map.appendChild(b);
   const AX=41,AY=75, still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const spot=t=>{const mr=map.getBoundingClientRect(); if(t===bean){const r=t.getBoundingClientRect(); return {x:r.left+r.width*.42-mr.left, y:r.top+r.height*.26-mr.top, face:1}} if(t.classList.contains('lock')){const r=t.getBoundingClientRect(); return {x:r.left+r.width*.5-mr.left, y:r.top+r.height*.27-mr.top, face:r.left+r.width/2<map.clientWidth/2?1:-1}} const m=t.querySelector('.tw-perch').getBoundingClientRect(), right=t.classList.contains('tr'); return {x:m.left+m.width/2-mr.left, y:m.top+m.height/2-mr.top, face:right?-1:1}};
+  const spot=t=>{const mr=map.getBoundingClientRect(), k=(mr.width/map.offsetWidth)||1, P=(x,y,f)=>({x:(x-mr.left)/k,y:(y-mr.top)/k,face:f}); if(t===bean){const r=t.getBoundingClientRect(); return P(r.left+r.width*.42, r.top+r.height*.26, 1)} if(t.classList.contains('lock')){const r=t.getBoundingClientRect(); return P(r.left+r.width*.5, r.top+r.height*.27, r.left+r.width/2-mr.left<mr.width/2?1:-1)} const m=t.querySelector('.tw-perch').getBoundingClientRect(), right=t.classList.contains('tr'); return P(m.left+m.width/2, m.top+m.height/2, right?-1:1)};
   const vis=t=>{const r=t.getBoundingClientRect(), vh=innerHeight; return r.bottom>60&&r.top<vh-90};
   let cur=bean||twigs.find(vis)||twigs[0], p=spot(cur), face=p.face, mode='perch', until=performance.now()+(cur===bean?7000:1500), F=null, raf;
   const put=(x,y,f,tilt=0)=>{b.style.transform=`translate(${(x-AX).toFixed(1)}px,${(y-AY).toFixed(1)}px) rotate(${tilt.toFixed(1)}deg) scaleX(${f})`};
@@ -7610,7 +7610,7 @@ function pbFlyer(v){const map=$('.mt-map',v); if(!map)return; const bean=$('.pb.
       if(now>until&&!still){const opts=twigs.filter(t=>t!==cur&&vis(t)); const tw=opts.filter(t=>t.classList.contains('pb-twig')), lk=opts.filter(t=>t.classList.contains('lock')); const home=opts.includes(bean); const near=cur===bean?(Math.random()<.5&&tw.length?tw:(lk.length?lk:tw)):(home&&Math.random()<.6?[bean]:(Math.random()<.5&&lk.length?lk:(tw.length?tw:(home?[bean]:opts))));
         const nx=near[Math.floor(Math.random()*near.length)]; if(!nx)until=now+1200; else{F={from:cur,to:nx,t:0,dur:2600+Math.random()*900,sw:(Math.random()<.5?-1:1)}; mode='fly'; b.classList.add('fly'); b.classList.remove('land')}}}
     else{const a=spot(F.from), z=spot(F.to); F.t=Math.min(1,F.t+16.7/F.dur); const t=F.t, e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-      const W2=map.clientWidth, vTop=-map.getBoundingClientRect().top+70, my=Math.max(vTop,Math.min(a.y,z.y)-Math.max(110,Math.abs(z.y-a.y)*.3+90));
+      const W2=map.clientWidth, vTop=-map.getBoundingClientRect().top/((map.getBoundingClientRect().width/map.offsetWidth)||1)+70, my=Math.max(vTop,Math.min(a.y,z.y)-Math.max(110,Math.abs(z.y-a.y)*.3+90));
       /* take off upward, sweep out over the path in a wide loop with a gentle wave, then glide down onto the twig */
       const mx=W2*(.5+.12*F.sw), x0=(1-e)*(1-e)*(1-e)*a.x+3*(1-e)*(1-e)*e*(a.x+(mx-a.x)*.9)+3*(1-e)*e*e*(z.x+(mx-z.x)*.9)+e*e*e*z.x;
       const y0=(1-e)*(1-e)*(1-e)*a.y+3*(1-e)*(1-e)*e*my+3*(1-e)*e*e*my+e*e*e*z.y, wave=Math.sin(t*Math.PI*4)*10*Math.sin(t*Math.PI);
@@ -8052,7 +8052,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v413';
+const APP_V='elocu-v414';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
