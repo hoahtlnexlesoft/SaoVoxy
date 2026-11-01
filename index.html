@@ -5133,6 +5133,12 @@ html:not(#k1):not(#k2):not(#k3):not(#k4):not(#k5):not(#k6):not(#k7):not(#k8):not
 .pb.cur .pb-bird .pb-peck{width:100%;height:auto;display:block}
 html body .pb.cur .pb-spk{display:none!important}
 html body .pb.cur .pb-bird{display:none!important}
+.pb-tip{position:absolute;left:0;top:0;z-index:9;max-width:190px;padding:7px 11px;border-radius:14px 14px 14px 4px;background:#fff;color:#3A2E6E;font-size:12.5px;font-weight:800;line-height:1.3;box-shadow:0 8px 20px -10px rgba(60,40,140,.45),0 0 0 1.5px rgba(122,96,230,.18);pointer-events:none;opacity:0;scale:.6;transform-origin:0 100%;transition:opacity .2s,scale .28s cubic-bezier(.3,1.6,.5,1)}
+.pb-tip.on{opacity:1;scale:1}
+.mt-map.tip-on .pb.cur .pb-say{opacity:0;transition:opacity .2s}
+.pb-tip{max-width:min(200px,calc(100% - 120px))}
+.pb-flyer.cheer .fy-perch{animation:fyCheer .9s ease-out}
+@keyframes fyCheer{25%{transform:translateY(-10px)}50%{transform:translateY(0)}70%{transform:translateY(-5px)}100%{transform:none}}
 /* ===== edge twigs + flying Sáo on the lesson path ===== */
 .pb-twig{position:absolute;top:56px;width:128px;height:60px;pointer-events:none;z-index:0}
 .pb-twig svg{width:100%;height:100%;overflow:visible;display:block}
@@ -7603,12 +7609,27 @@ function pbFlyer(v){const map=$('.mt-map',v); if(!map)return; const bean=$('.pb.
   const spot=t=>{const mr=map.getBoundingClientRect(), k=(mr.width/map.offsetWidth)||1, P=(x,y,f)=>({x:(x-mr.left)/k,y:(y-mr.top)/k,face:f}); if(t===bean){const r=t.getBoundingClientRect(); return P(r.left+r.width*.42, r.top+r.height*.26, 1)} if(t.classList.contains('lock')){const r=t.getBoundingClientRect(); return P(r.left+r.width*.5, r.top+r.height*.27, r.left+r.width/2-mr.left<mr.width/2?1:-1)} const m=t.querySelector('.tw-perch').getBoundingClientRect(), right=t.classList.contains('tr'); return P(m.left+m.width/2, m.top+m.height/2, right?-1:1)};
   const vis=t=>{const r=t.getBoundingClientRect(), vh=innerHeight; return r.bottom>60&&r.top<vh-90};
   let cur=bean||twigs.find(vis)||twigs[0], p=spot(cur), face=p.face, mode='perch', until=performance.now()+(cur===bean?7000:1500), F=null, raf;
+  /* Sáo nudges the learner: it stays on the bean to study; after a while with no activity it visits a locked bean, then flies back with a hint */
+  let idleAt=performance.now()+9000, tour=[], tipUntil=0, tipTxt='';
+  const tip=document.createElement('div'); tip.className='pb-tip'; map.appendChild(tip);
+  const poke=()=>{idleAt=performance.now()+9000}; ['pointerdown','wheel','touchstart','keydown'].forEach(ev=>addEventListener(ev,poke,{passive:true})); (v.closest('.scroll,main')||v).addEventListener('scroll',poke,{passive:true});
+  const say=(txt,ms)=>{tipTxt=txt; tip.textContent=txt; tip.classList.add('on'); map.classList.add('tip-on'); tipUntil=performance.now()+ms; b.classList.add('cheer'); setTimeout(()=>b.classList.remove('cheer'),900)};
+  const unitOf=t=>t&&t.dataset?t.dataset.pu:null;
+  const fresh=(()=>{try{const d=(S.days||{})[todayKey()]; return !d||(!d.xp&&!d.lesson)}catch(e){return false}})();
+  if(bean&&fresh)setTimeout(()=>{if(b.isConnected&&cur===bean&&mode==='perch')say('Hôm nay mình chưa ăn hạt nào… học cùng mình nhé!',4200)},1400);
   const put=(x,y,f,tilt=0)=>{b.style.transform=`translate(${(x-AX).toFixed(1)}px,${(y-AY).toFixed(1)}px) rotate(${tilt.toFixed(1)}deg) scaleX(${f})`};
   put(p.x,p.y,face);
   const loop=now=>{if(!b.isConnected)return cancelAnimationFrame(raf);
     if(mode==='perch'){p=spot(cur); put(p.x,p.y,face);
-      if(now>until&&!still){const opts=twigs.filter(t=>t!==cur&&vis(t)); const tw=opts.filter(t=>t.classList.contains('pb-twig')), lk=opts.filter(t=>t.classList.contains('lock')); const home=opts.includes(bean); const near=cur===bean?(Math.random()<.5&&tw.length?tw:(lk.length?lk:tw)):(home&&Math.random()<.6?[bean]:(Math.random()<.5&&lk.length?lk:(tw.length?tw:(home?[bean]:opts))));
-        const nx=near[Math.floor(Math.random()*near.length)]; if(!nx)until=now+1200; else{F={from:cur,to:nx,t:0,dur:2600+Math.random()*900,sw:(Math.random()<.5?-1:1)}; mode='fly'; b.classList.add('fly'); b.classList.remove('land')}}}
+      let nx=null;
+      if(!still&&bean&&cur===bean&&!tour.length&&now>idleAt&&now>tipUntil&&vis(bean)){
+        const after=locks.filter(t=>vis(t)&&(t.compareDocumentPosition(bean)&Node.DOCUMENT_POSITION_PRECEDING)), lk=after[0]||locks.find(vis), tw=twigs.filter(t=>t.classList.contains('pb-twig')&&vis(t));
+        if(lk){tour=[lk]; if(tw.length&&Math.random()<.5)tour.push(tw[Math.floor(Math.random()*tw.length)]); tour.push(bean); tour.hint=unitOf(lk)&&unitOf(lk)===unitOf(bean)?'Học xong vòng này là mở được hạt kia đó!':'Học bài này trước nhé!'}
+        else idleAt=now+9000}
+      if(!still&&cur!==bean&&now>until&&!tour.length)tour=[bean];
+      if(tour.length&&now>until&&mode==='perch')nx=tour.shift();
+      if(nx&&!vis(nx)&&nx!==bean){nx=null; tour=[bean]}
+      if(nx){until=Infinity;F={from:cur,to:nx,t:0,dur:2600+Math.random()*900,sw:(Math.random()<.5?-1:1)}; mode='fly'; b.classList.add('fly'); b.classList.remove('land')}}
     else{const a=spot(F.from), z=spot(F.to); F.t=Math.min(1,F.t+16.7/F.dur); const t=F.t, e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
       const W2=map.clientWidth, vTop=-map.getBoundingClientRect().top/((map.getBoundingClientRect().width/map.offsetWidth)||1)+70, my=Math.max(vTop,Math.min(a.y,z.y)-Math.max(110,Math.abs(z.y-a.y)*.3+90));
       /* take off upward, sweep out over the path in a wide loop with a gentle wave, then glide down onto the twig */
@@ -7617,7 +7638,8 @@ function pbFlyer(v){const map=$('.mt-map',v); if(!map)return; const bean=$('.pb.
       const x=x0, y=y0+wave, dx=x-(F.px??x); F.px=x; if(Math.abs(dx)>.4)face=dx>0?1:-1;
       const flapOn=!(t>.5&&t<.62)&&t<.9; b.classList.toggle('glide',!flapOn);
       put(x,y,face,(t<.2?-18:t>.85?6:-6)*face);
-      if(t>=1){cur=F.to; face=spot(cur).face; mode='perch'; b.classList.remove('glide'); until=now+(cur===bean?9000+Math.random()*6000:3000+Math.random()*2500); b.classList.remove('fly'); b.classList.add('land')}}
+      if(t>=1){cur=F.to; face=spot(cur).face; mode='perch'; b.classList.remove('glide'); until=now+(cur===bean?0:2600); if(cur===bean&&tour.hint){say(tour.hint,4200); tour.hint=null; idleAt=now+22000} b.classList.remove('fly'); b.classList.add('land')}}
+    if(tip.classList.contains('on')){if(now>tipUntil||cur!==bean||mode!=='perch'){tip.classList.remove('on'); map.classList.remove('tip-on')} else{const q=spot(bean); tip.style.transform=`translate(${(q.x+22).toFixed(1)}px,${(q.y-48).toFixed(1)}px) translateY(-100%)`}}
     raf=requestAnimationFrame(loop)};
   raf=requestAnimationFrame(loop)}
 function viewLessons(v){
@@ -8052,7 +8074,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v414';
+const APP_V='elocu-v415';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
