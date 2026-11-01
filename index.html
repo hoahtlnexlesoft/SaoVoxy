@@ -4949,7 +4949,15 @@ html body .fz-bird .fz-f:not(.fz-n){z-index:1!important}
 @keyframes fzGust{0%{opacity:0;transform:translate(0,0) rotate(0)}8%{opacity:.95}35%{transform:translate(calc(var(--dx) * .45),60px) rotate(140deg)}60%{transform:translate(calc(var(--dx) * .7),130px) rotate(240deg)}85%{opacity:.85}100%{opacity:0;transform:translate(var(--dx),230px) rotate(400deg)}}
 @keyframes fzFlut{from{transform:rotateX(0) rotateY(10deg) scaleX(1)}to{transform:rotateX(55deg) rotateY(-30deg) scaleX(.7)}}
 @media (prefers-reduced-motion:reduce){.fz-wind{display:none!important}}
-.fz.has-clip :is(.fz-sky,.fz-perg,.fz-dots,.fz-branch,.fz-wall,.fz-gsh,.fz-bird,.fz-bowl,.fz-crumbs,.fz-bowlf,.fz-say,.fz-you,.fz-notes){display:none!important}
+.fz.has-clip :is(.fz-sky,.fz-perg,.fz-dots,.fz-branch,.fz-wall,.fz-gsh,.fz-bird,.fz-bowl,.fz-crumbs,.fz-bowlf,.fz-notes){display:none!important}
+.fz-stage{display:none}
+.fz.has-clip .fz-clip2{opacity:0}
+.fz.has-clip.clip-loop .fz-clip2{opacity:1;z-index:2}
+.fz.has-clip .fz-stage{display:block;position:absolute;left:0;top:0;width:100%;aspect-ratio:9/16;z-index:5;pointer-events:none}
+html body .fz.has-clip .fz-stage .fz-say{transform:none!important;left:4%;right:auto;top:auto;bottom:61%;width:auto;max-width:48%;justify-content:flex-start}
+html body .fz.has-clip .fz-stage .fz-say span{border-radius:20px 20px 6px 20px;transform-origin:bottom right}
+html body .fz.has-clip .fz-stage .fz-you{left:4%;right:auto;top:auto;bottom:61%;max-width:48%;text-align:left}
+html body .fz.has-clip .fz-stage .fz-you span{border-radius:20px 20px 6px 20px;transform-origin:bottom right}
 /* eating, front view: Sáo stands right behind the bowl and bobs down into it — no turning round */
 html body .fz-bird.eating .fz-body{animation:fzBow 2.4s cubic-bezier(.45,0,.35,1) infinite!important;transform-origin:50% 96%}
 @keyframes fzBow{0%,100%{transform:none}12%,20%{transform:translateY(5px) scale(1.05,.9)}28%{transform:translateY(1px) scale(1.01,.98)}36%,44%{transform:translateY(5px) scale(1.05,.9)}56%{transform:none}}
@@ -8074,7 +8082,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v415';
+const APP_V='elocu-v417';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8298,7 +8306,7 @@ function introSlides(done){
   const branch=`<path d="M-20 70C60 52 120 64 190 54S310 40 360 50" stroke="#7A5232" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M-20 66C60 48 120 60 190 50S310 36 360 46" stroke="#A97A4E" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/><path d="M250 47c18-12 30-26 34-42" stroke="#7A5232" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M80 60c-6 14-4 28 4 40" stroke="#7A5232" stroke-width="5" fill="none" stroke-linecap="round"/>${cluster(290,10,8,28,.42,51)}${cluster(84,100,6,22,.4,57)}${cluster(355,48,8,26,.42,61)}${cluster(150,48,5,22,.4,67)}${[[18,62,-160],[40,58,-30],[118,58,200],[150,52,-20],[206,50,190],[232,46,-15],[300,44,170],[320,40,-40]].map(([x,y,r],k)=>lf(x,y,r,.62,["#6F8F62","#7E9C6F","#5F8055","#8AA77B"][k%4])).join("")}`;
   const petals=[...Array(10)].map((_,i)=>`<i class="fz-pt" style="left:${(i*11+4)%96}%;--d:${(i*1.3).toFixed(1)}s;--t:${8+i%5}s"><svg viewBox="-13 -31 26 32"><path d="${BR}" fill="${PINK[i%5]}"/></svg></i>`).join('');
   const pdots=[...Array(10)].map((_,i)=>`<i class="fz-p" style="left:${(i*61)%100}%;top:${30+(i*37)%45}%;--d:${(i*.6)%7}s;--t:${6+(i%5)}s"></i>`).join('');
-  el.innerHTML=`<div class="fz-wind" aria-hidden="true">${[...Array(22)].map((_,i)=>`<i style="left:${(i*23+3)%92}%;top:${2+(i*13)%24}%;--d:${(i*.73).toFixed(2)}s;--t:${(5.2+(i%5)*.9).toFixed(1)}s;--dx:${70+(i%4)*30}px;--s:${(.7+(i%3)*.25).toFixed(2)}"><svg viewBox="-13 -31 26 32"><path d="M0 0C-6.4-1.6-13.4-6.6-14-13.6-14.4-18.4-10.6-22.6-6.6-26-4.2-28-1.8-30.6 0-34 1.8-30.6 4.2-28 6.6-26 10.6-22.6 14.4-18.4 14-13.6 13.4-6.6 6.4-1.6 0 0z" fill="${['#B98AF0','#C69CF4','#A974E8','#D9B8FA'][i%4]}"/></svg></i>`).join('')}</div><video class="fz-clip" id="fz-clip" src="media/sao-onboard.mp4" poster="media/sao-onboard.jpg" autoplay muted loop playsinline preload="auto" aria-label="Sáo bay xuống giỏ mây và ăn hạt kê"></video><div class="fz-sky fz-sky2"><span class="fz-sun"></span><span class="fz-ray r1"></span><span class="fz-ray r2"></span></div>
+  el.innerHTML=`<div class="fz-wind" aria-hidden="true">${[...Array(22)].map((_,i)=>`<i style="left:${(i*23+3)%92}%;top:${2+(i*13)%24}%;--d:${(i*.73).toFixed(2)}s;--t:${(5.2+(i%5)*.9).toFixed(1)}s;--dx:${70+(i%4)*30}px;--s:${(.7+(i%3)*.25).toFixed(2)}"><svg viewBox="-13 -31 26 32"><path d="M0 0C-6.4-1.6-13.4-6.6-14-13.6-14.4-18.4-10.6-22.6-6.6-26-4.2-28-1.8-30.6 0-34 1.8-30.6 4.2-28 6.6-26 10.6-22.6 14.4-18.4 14-13.6 13.4-6.6 6.4-1.6 0 0z" fill="${['#B98AF0','#C69CF4','#A974E8','#D9B8FA'][i%4]}"/></svg></i>`).join('')}</div><video class="fz-clip" id="fz-clip" src="media/sao-onboard.mp4" poster="media/sao-onboard.jpg" autoplay muted playsinline preload="auto" aria-label="Sáo bay xuống cành bên giỏ mây"></video><video class="fz-clip fz-clip2" id="fz-clip2" src="media/sao-onboard-loop.mp4" muted loop playsinline preload="auto" aria-hidden="true"></video><div class="fz-sky fz-sky2"><span class="fz-sun"></span><span class="fz-ray r1"></span><span class="fz-ray r2"></span></div>
     <svg class="fz-perg" viewBox="0 0 420 260" preserveAspectRatio="xMidYMin slice"><defs>${grads}<filter id="ppr" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".32" numOctaves="3" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -1.3 .62" result="w"/><feComposite in="w" in2="SourceGraphic" operator="in" result="t"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="t"/></feMerge></filter><filter id="dk"><feColorMatrix type="matrix" values=".78 0 0 0 0 0 .78 0 0 0 0 0 .78 0 0 0 0 0 1 0"/></filter></defs><g class="fz-can">${canopy}</g>${hang}</svg>
     <div class="fz-dots">${pdots}${petals}</div>
     <svg class="fz-branch" id="fz-branch" viewBox="0 0 340 120" preserveAspectRatio="none"><defs>${grads.replace(/id="bg/g,'id="bb')}<filter id="dk2"><feColorMatrix type="matrix" values=".78 0 0 0 0 0 .78 0 0 0 0 0 .78 0 0 0 0 0 1 0"/></filter></defs>${branch.replace(/url\(#bg/g,'url(#bb').replace(/url\(#dk\)/g,'url(#dk2)')}</svg>
@@ -8322,7 +8330,10 @@ function introSlides(done){
       <button class="fz-go" id="fz-go"><span>Bắt đầu cùng Sáo</span>${I.arrow}</button>
       ${inClaude?'':'<button class="fz-login" id="fz-login">Đã có tài khoản? <b>Đăng nhập</b></button>'}</div>`;
   $('#screen').appendChild(el);
-  const clip=$('#fz-clip',el); if(clip)el.classList.add('has-clip'); const bowl=$('#fz-bowl',el), bowlf=$('#fz-bowlf',el), crumbs=$('#fz-crumbs',el); const mor=$('#fz-morph',el), bird=$('#fz-bird',el), say=$('#fz-say',el), you=$('#fz-you',el), notes=$('#fz-notes',el), gsh=$('#fz-gsh',el);
+  const clip=$('#fz-clip',el); if(clip){el.classList.add('has-clip'); clip.muted=true;
+    /* play the fly-in once, then loop the standing part back and forth (the file holds it forward + reversed) */
+    const c2=$('#fz-clip2',el); c2.muted=true; clip.addEventListener('ended',()=>{c2.currentTime=0; c2.play().catch(()=>{}); el.classList.add('clip-loop')});
+    const stage=document.createElement('div'); stage.className='fz-stage'; el.appendChild(stage); requestAnimationFrame(()=>{stage.append($('#fz-say',el),$('#fz-you',el))})} const bowl=$('#fz-bowl',el), bowlf=$('#fz-bowlf',el), crumbs=$('#fz-crumbs',el); const mor=$('#fz-morph',el), bird=$('#fz-bird',el), say=$('#fz-say',el), you=$('#fz-you',el), notes=$('#fz-notes',el), gsh=$('#fz-gsh',el);
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* perched on the branch: bob & look around, hop along it, flutter, somersault */
   let raf=0, face=1, last=performance.now(), mode='perch', modeUntil=performance.now()+1500, flipA=0, talking=false, blinkAt=performance.now()+2000, frS=.3;
@@ -8420,7 +8431,7 @@ const CHIRPS=["data:audio/mp4;base64,AAAAHGZ0eXBNNEEgAAACAE00QSBpc29taXNvMgAAAAh
   const songLoop=()=>{if(!speaking)chirp(); songTm=setTimeout(songLoop,3500+Math.random()*3500)};
   const snd=document.createElement('button'); snd.className='fz-snd'; snd.setAttribute('aria-label','Bật tiếng hót'); snd.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="w1" d="M16.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M19 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>';
   el.appendChild(snd);
-  const setSong=v=>{songOn=v; if(clip){snd.classList.toggle('on',v); try{localStorage.setItem('fz.song',v?'1':'0')}catch(e){} clip.muted=!v; clip.play().catch(()=>{}); return} snd.classList.toggle('on',v); try{localStorage.setItem('fz.song',v?'1':'0')}catch(e){} clearTimeout(songTm); if(v){try{audioMode&&audioMode('playback')}catch(e){} prime(); unlockVoice(); setTimeout(()=>chirp(3),250); songTm=setTimeout(songLoop,1600)} else pool.forEach(x=>{try{x.pause()}catch(e){}})};
+  const setSong=v=>{songOn=v; if(clip&&!el.classList.contains('clip-loop'))clip.play().catch(()=>{}); snd.classList.toggle('on',v); try{localStorage.setItem('fz.song',v?'1':'0')}catch(e){} clearTimeout(songTm); if(v){try{audioMode&&audioMode('playback')}catch(e){} prime(); unlockVoice(); setTimeout(()=>chirp(3),250); songTm=setTimeout(songLoop,1600)} else pool.forEach(x=>{try{x.pause()}catch(e){}})};
   snd.onclick=e=>{e.stopPropagation(); if(songOn&&!primed){unlock();return} setSong(!songOn); el.classList.remove('need-tap')};
   let wantSong=true; try{wantSong=localStorage.getItem('fz.song')!=='0'}catch(e){}
   if(wantSong){songOn=true; snd.classList.add('on'); el.classList.add('need-tap')}
@@ -8443,12 +8454,12 @@ const CHIRPS=["data:audio/mp4;base64,AAAAHGZ0eXBNNEEgAAACAE00QSBpc29taXNvMgAAAAh
     if(SAO_VO[t])return new Promise(res=>{try{try{speechSynthesis.cancel()}catch(e){} aiStop(); audioMode('playback'); const a=AIV.el||(AIV.el=new Audio()); a.muted=false; a.volume=1; a.playbackRate=1; a.src=SAO_VO[t]; a.onended=a.onerror=()=>res(); const p=a.play(); p&&p.catch&&p.catch(()=>res()); setTimeout(res,7000)}catch(e){res()}});
     if(!VI.test(t.replace(/Sáo/g,'')))return Promise.race([window.say(t,.9),new Promise(r=>setTimeout(r,6000))]).catch(()=>{});
     return new Promise(res=>{try{speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); const v=speechSynthesis.getVoices().find(x=>/^vi/i.test(x.lang)); if(v)u.voice=v; u.lang='vi-VN'; u.rate=1; u.pitch=1.15; u.onend=u.onerror=()=>res(); speechSynthesis.speak(u); setTimeout(res,6000)}catch(e){res()}})};
-  const step=()=>{if(clip)return; if(si>0&&si%SCRIPT.length===0&&!step.rest){step.rest=1; say.classList.remove('on'); you.classList.remove('on'); setTimeout(()=>{if(el.isConnected&&mode==='perch')goEat()},600); tm=setTimeout(()=>{step.rest=0; step()},16000); return} const [who,txt,vi]=SCRIPT[si%SCRIPT.length]; si++; lastTxt=txt; lastWho=who;
-    if(who==='s'){you.classList.remove('on'); show(say,txt,vi); talk(txt); for(let k=0;k<3;k++)setTimeout(()=>{const n=document.createElement('i'); n.textContent=['♪','♫','♩'][k]; n.style.setProperty('--dx',(Math.random()*40-20)+'px'); notes.appendChild(n); setTimeout(()=>n.remove(),1600)},k*260); 0}
-    else{say.classList.remove('on'); show(you,txt,vi); setTimeout(()=>{if(!talking&&mode==='perch'){const r=Math.random(); r<.4?goEat():r<.75?flip():takeoff()}},450)}
+  const step=()=>{if(si>0&&si%SCRIPT.length===0&&!step.rest){step.rest=1; say.classList.remove('on'); you.classList.remove('on'); if(!clip)setTimeout(()=>{if(el.isConnected&&mode==='perch')goEat()},600); tm=setTimeout(()=>{step.rest=0; step()},16000); return} const [who,txt,vi]=SCRIPT[si%SCRIPT.length]; si++; lastTxt=txt; lastWho=who;
+    if(who==='s'){you.classList.remove('on'); show(say,txt,vi); if(clip)say.dataset.side='r'; else talk(txt); for(let k=0;k<3;k++)setTimeout(()=>{const n=document.createElement('i'); n.textContent=['♪','♫','♩'][k]; n.style.setProperty('--dx',(Math.random()*40-20)+'px'); notes.appendChild(n); setTimeout(()=>n.remove(),1600)},k*260); 0}
+    else{say.classList.remove('on'); show(you,txt,vi); if(!clip)setTimeout(()=>{if(!talking&&mode==='perch'){const r=Math.random(); r<.4?goEat():r<.75?flip():takeoff()}},450)}
     const t0=Date.now(), base=who==='s'?2600:1700; voice(txt,who).then(()=>{if(!el.isConnected)return; clearTimeout(tm); tm=setTimeout(step,Math.max(700,base-(Date.now()-t0)))});
     tm=setTimeout(step,base+6500)};
-  tm=setTimeout(step,700);
+  tm=setTimeout(step,clip?2000:700);
   const finish=()=>{cancelAnimationFrame(raf); clearTimeout(tm); clearTimeout(songTm); try{pool.forEach(x=>x.pause())}catch(e){} S.introSeen=true; save(); el.classList.add('out'); setTimeout(()=>{el.remove(); done&&done()},420)};
   $('#fz-go',el).onclick=()=>{sfx('tap'); finish()};
   $('#fz-login',el)&&($('#fz-login',el).onclick=()=>{cancelAnimationFrame(raf); clearTimeout(tm); clearTimeout(songTm); try{pool.forEach(x=>x.pause())}catch(e){} S.introSeen=true;S.onboarded=true;save();el.remove();refreshRail();go('home');loginSheet()});
