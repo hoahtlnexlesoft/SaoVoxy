@@ -8352,7 +8352,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v469';
+const APP_V='elocu-v470';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8916,17 +8916,20 @@ async function loginSheet(){
     const app=(()=>{try{return isStandalone()}catch(e){return false}})();
     const cli=app?(window._sbI||(window._sbI=window.supabase.createClient(SB_URL,SB_KEY,{auth:{flowType:'implicit',persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'sb-implicit'}}))):sb;
     const {error}=await cli.auth.signInWithOtp({email:em,options:{emailRedirectTo:redirect}});
-    b.disabled=false; if(error){note.textContent='Chưa gửi được: '+error.message;return}
+    if(error){const m=(error.message||'').match(/after (\d+) second/); if(m){let n=+m[1]; note.innerHTML='Vừa gửi link rồi, đợi một chút để gửi lại nhé. Nếu đã nhận email, hãy dùng link trong email đó.'; const lb=b.textContent; const tick=()=>{if(n<=0){b.disabled=false;b.textContent=lb;return} b.textContent='Gửi lại sau '+n+' giây'; n--; setTimeout(tick,1000)}; tick(); if(app)showPaste(); return} b.disabled=false; note.textContent='Chưa gửi được: '+error.message;return}
+    b.disabled=false;
     if(!app){note.innerHTML=`Đã gửi link tới <b>${esc(em)}</b>. Mở email trên máy này và bấm vào link để đăng nhập.`; sfx('right'); return}
     note.innerHTML=`Đã gửi email tới <b>${esc(em)}</b>.<br><b>Đừng bấm vào link</b> (sẽ mở Safari). Hãy <b>nhấn giữ</b> nút đăng nhập trong email → <b>Sao chép liên kết</b>, rồi quay lại đây bấm nút bên dưới.`;
+    showPaste(); sfx('right')};
+  if((()=>{try{return isStandalone()}catch(e){return false}})()){note.innerHTML='Trên app cài ở màn hình chính: <b>đừng bấm</b> link trong email (sẽ mở Safari). Hãy <b>nhấn giữ</b> nút đăng nhập trong email → <b>Sao chép liên kết</b>, rồi bấm nút dán bên dưới.'; setTimeout(()=>showPaste(),0)}
+  function showPaste(){
     if(!$('#lg-paste',el)){note.insertAdjacentHTML('afterend',`<div class="lg-paste" id="lg-paste"><button class="btn primary" type="button" id="lg-pbtn">Dán link & đăng nhập</button><input class="field" id="lg-pin" placeholder="…hoặc dán link vào đây" autocomplete="off"></div>`);
       const go_=async raw=>{const tk=lgParseLink(raw); if(!tk){note.innerHTML='Chưa thấy link đăng nhập hợp lệ. Hãy nhấn giữ nút trong email → <b>Sao chép liên kết</b> rồi thử lại.';return}
         note.textContent='Đang đăng nhập…'; const {error:e2}=await sb.auth.verifyOtp({token_hash:tk.token,type:tk.type});
         if(e2){note.textContent='Link đã hết hạn hoặc đã dùng rồi. Bấm "Gửi link đăng nhập" để nhận link mới.';return}
         sfx('right'); toast('Đã đăng nhập'); close()};
       $('#lg-pbtn',el).onclick=async()=>{let t=''; try{t=await navigator.clipboard.readText()}catch(e){} if(t)go_(t); else {$('#lg-pin',el).focus(); note.innerHTML='Hãy dán link vào ô bên dưới (nhấn giữ → Dán).'}};
-      $('#lg-pin',el).addEventListener('input',e=>{if(e.target.value.length>20)go_(e.target.value)})}
-    sfx('right')};
+      $('#lg-pin',el).addEventListener('input',e=>{if(e.target.value.length>20)go_(e.target.value)})}}
 }
 
 function lgParseLink(raw){let u=String(raw||'').trim(); for(let i=0;i<4;i++){try{const d=decodeURIComponent(u); if(d===u)break; u=d}catch(e){break}}
