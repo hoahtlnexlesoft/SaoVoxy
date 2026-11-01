@@ -8335,7 +8335,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v455';
+const APP_V='elocu-v456';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8534,7 +8534,7 @@ function introSlides(done){
   /* flat illustration bougainvillea (like the reference): teardrop bract, maroon twig with a white bud dot */
   const BR='M0 0C-6.4-1.6-13.4-6.6-14-13.6-14.4-18.4-10.6-22.6-6.6-26-4.2-28-1.8-30.6 0-34 1.8-30.6 4.2-28 6.6-26 10.6-22.6 14.4-18.4 14-13.6 13.4-6.6 6.4-1.6 0 0z';
   const VN='M0-2.5V-17';
-  const PINK=['#A974E8','#B98AF0','#9A62E0','#C69CF4','#AE7AEC','#E35FB4'];
+  const PINK=document.documentElement.dataset.palette==='vivid'?['#F07AA8','#F590B8','#E8659A','#F7A6C4','#EE86B0','#E35FB4']:['#A974E8','#B98AF0','#9A62E0','#C69CF4','#AE7AEC','#E35FB4'];
   /* paper bougainvillea (like the reference photo): three papery heart-shaped bracts, fine veins, maroon tubes and a tiny cream star flower */
   const bract=(x,y,r,s,c,k,side)=>{const one=(rot,sc)=>`<g transform="rotate(${rot}) scale(${sc})"><path d="${BR}" fill="url(#bg${k})"/><path d="M0-1.5C-.4-11-.2-21 0-31" stroke="#5E33A6" stroke-opacity=".4" stroke-width=".8" fill="none"/><path d="M-.2-8C-3-10.6-6-13.6-8-18M.2-14.6C3-17 5.2-20 6.4-23.6M-.2-19C-2.2-21-3.6-23-4.4-25" stroke="#5E33A6" stroke-opacity=".28" stroke-width=".6" fill="none" stroke-linecap="round"/><path d="M-7-12C-5.6-16-3.6-19-1.6-21" stroke="#fff" stroke-opacity=".28" stroke-width="1" fill="none" stroke-linecap="round"/></g>`;
     const tube=a=>`<path d="M0-1C${(a*.4).toFixed(1)}-7 ${(a*.8).toFixed(1)}-13 ${a.toFixed(1)}-19" stroke="#7A2E7E" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="${a.toFixed(1)}" cy="-19" r=".9" fill="#8E3A92"/>`;
