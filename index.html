@@ -5318,7 +5318,9 @@ html[data-palette="vivid"]:not(#v1):not(#v2):not(#v3):not(#v4):not(#v5):not(#v6)
 .ly-t span{font-size:12.5px;color:var(--muted)}
 .ly-x{width:38px;height:38px;flex:none;border-radius:50%;border:0;display:grid;place-items:center;background:var(--surface-2);color:var(--fg);cursor:pointer}
 .ly-x svg{width:18px;height:18px}
-.ly-list{position:relative;flex:1;min-height:0;max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding:6px 2px 30vh;mask-image:linear-gradient(180deg,transparent 0,#000 18px,#000 calc(100% - 40px),transparent)}
+.ly-list{position:relative;flex:1;min-height:0;max-height:56vh;overflow-y:auto;padding:4px 2px 12vh;display:flex;flex-direction:column;gap:12px}
+.ly-tx{margin:0}
+.ly-tx .sent{cursor:pointer}
 .ly-l{all:unset;box-sizing:border-box;cursor:pointer;padding:10px 12px;border-radius:14px;font-family:var(--f-display);font-size:19px;line-height:1.4;font-weight:700;color:var(--faint);transition:color .25s,background .25s,transform .25s;transform-origin:left center}
 .ly-l.past{color:var(--muted)}
 .ly-l.now{color:var(--ink);transform:none}
@@ -7096,13 +7098,13 @@ function viewListen(v){
   v.insertAdjacentHTML('beforeend',voaBoxHTML()); loadVOA(v);
   const tx=$('#tx'), np=$('#np'), waveBars=$$('#wave i'); let playing=false, cur=0;
   let ly=null;
-  const lyMark=i=>{if(!ly)return; $$('.ly-l',ly).forEach(l=>l.classList.toggle('now',+l.dataset.i===i)); $$('.ly-l',ly).forEach(l=>l.classList.toggle('past',+l.dataset.i<i)); const n=ly.querySelector('.ly-l.now'); if(n){const box=ly.querySelector('.ly-list'); box.scrollTo({top:n.offsetTop-box.clientHeight/2+n.offsetHeight/2,behavior:'smooth'})}};
+  const lyMark=i=>{if(!ly)return; $$('.sent',ly).forEach(l=>l.classList.toggle('now',+l.dataset.i===i)); const n=ly.querySelector('.sent.now'); if(n){const box=ly.querySelector('.ly-list'); const top=n.getBoundingClientRect().top-box.getBoundingClientRect().top+box.scrollTop; box.scrollTo({top:Math.max(0,top-box.clientHeight/3),behavior:'smooth'})}};
   const mark=i=>{$$('.sent',tx).forEach(s=>s.classList.toggle('now',+s.dataset.i===i)); const upto=i<0?0:Math.round((i+1)/sents.length*waveBars.length); waveBars.forEach((b,k)=>b.classList.toggle('p',k<upto)); lyMark(i)};
   const setPlay=on=>{playing=on;np.classList.toggle('playing',on);$('#playall').innerHTML=on?I.stop:I.play; if(ly){ly.classList.toggle('playing',on); ly.querySelector('#ly-play').innerHTML=on?I.stop:I.play}};
   const openLy=()=>{ if(ly)return; ly=document.createElement('div'); ly.className='tsheet ly-sheet';
     ly.innerHTML=`<div class="ts-back"></div><div class="ts-card"><div class="ts-grab"></div>
-      <div class="ly-head"><span class="ly-art ${P.tile}">${ART[P.art]}</span><div class="ly-t"><b>${esc(P.title)}</b><span>${P.level} · ${esc(P.topic)} · chạm 1 câu để nghe từ đó</span></div><button class="ly-x" aria-label="Đóng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-      <div class="ly-list">${sents.map((t,i)=>`<button class="ly-l" data-i="${i}"><span>${esc(t)}</span></button>`).join('')}</div>
+      <div class="ly-head"><span class="ly-art ${P.tile}">${ART[P.art]}</span><div class="ly-t"><b>${esc(P.title)}</b><span>${P.level} · ${esc(P.topic)} · ${sents.length} câu</span></div><button class="ly-x" aria-label="Đóng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="ly-list"><p class="tx-hint">Chạm 1 câu để nghe lại câu đó.</p><p class="transcript ly-tx">${sents.map((t,i)=>`<span class="sent" data-i="${i}">${esc(t)}</span> `).join('')}</p></div>
       <div class="ly-ctrl"><button class="round" id="ly-prev" aria-label="Câu trước"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5.5v13a1 1 0 0 1-1.5.86L9 13.2a1.4 1.4 0 0 1 0-2.4l9.5-6.16A1 1 0 0 1 20 5.5z"/></svg></button><button class="play" id="ly-play" aria-label="Phát">${playing?I.stop:I.play}</button><button class="round" id="ly-next" aria-label="Câu sau"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5.5v13a1 1 0 0 0 1.5.86L15 13.2a1.4 1.4 0 0 0 0-2.4L5.5 4.64A1 1 0 0 0 4 5.5z"/></svg></button></div></div>`;
     ($('#screen')||document.body).appendChild(ly); ly.classList.toggle('playing',playing);
     try{const pc=getComputedStyle($('#playall')),lp=ly.querySelector('#ly-play'); ['background','color','box-shadow','border'].forEach(k=>lp.style.setProperty(k,pc.getPropertyValue(k)))}catch(e){}
@@ -7110,7 +7112,7 @@ function viewListen(v){
     ly.querySelector('.ts-back').onclick=close; ly.querySelector('.ly-x').onclick=close;
     ly.querySelector('#ly-play').onclick=()=>$('#playall').click();
     ly.querySelector('#ly-prev').onclick=()=>$('#prev').click(); ly.querySelector('#ly-next').onclick=()=>$('#nextS').click();
-    $$('.ly-l',ly).forEach(l=>l.onclick=()=>{hush(); setPlay(false); setTimeout(()=>run(+l.dataset.i),60)});
+    $$('.sent',ly).forEach(l=>l.onclick=()=>{hush(); setPlay(false); setTimeout(()=>run(+l.dataset.i),60)});
     lyMark(playing||cur>0?Math.min(cur,sents.length-1):-1);
     if(!playing)run(cur>=sents.length?0:cur)};
   const run=async from=>{setPlay(true);for(cur=from;cur<sents.length&&playing;cur++){mark(cur);await say(sents[cur])} if(playing){cur=0;setPlay(false)}};
@@ -8281,7 +8283,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v439';
+const APP_V='elocu-v440';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
