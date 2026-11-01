@@ -5301,6 +5301,32 @@ html[data-palette="vivid"]:not(#v1):not(#v2):not(#v3):not(#v4):not(#v5):not(#v6)
 html[data-palette="vivid"]:not(#v1):not(#v2):not(#v3):not(#v4):not(#v5):not(#v6):not(#v7):not(#v8):not(#v9):not(#v10):not(#v11):not(#v12):not(#v13):not(#v14):not(#v15):not(#v16):not(#v17):not(#v18):not(#v19):not(#v20):not(#v21):not(#v22):not(#v23):not(#v24):not(#v25):not(#v26):not(#v27):not(#v28):not(#v29):not(#v30):not(#v31):not(#v32) body .screen .pb-tip,html[data-palette="vivid"]:not(#v1):not(#v2):not(#v3):not(#v4):not(#v5):not(#v6):not(#v7):not(#v8):not(#v9):not(#v10):not(#v11):not(#v12):not(#v13):not(#v14):not(#v15):not(#v16):not(#v17):not(#v18):not(#v19):not(#v20):not(#v21):not(#v22):not(#v23):not(#v24):not(#v25):not(#v26):not(#v27):not(#v28):not(#v29):not(#v30):not(#v31):not(#v32) body .screen .pb-say{color:#24262D!important}html[data-palette="vivid"]:not(#v1):not(#v2):not(#v3):not(#v4):not(#v5):not(#v6):not(#v7):not(#v8):not(#v9):not(#v10):not(#v11):not(#v12):not(#v13):not(#v14):not(#v15):not(#v16):not(#v17):not(#v18):not(#v19):not(#v20):not(#v21):not(#v22):not(#v23):not(#v24):not(#v25):not(#v26):not(#v27):not(#v28):not(#v29):not(#v30):not(#v31):not(#v32) body .screen .pb-tip{box-shadow:0 10px 22px -12px rgba(20,22,30,.4)!important}
 html[data-palette="vivid"]:not(#v1):not(#v2):not(#v3):not(#v4):not(#v5):not(#v6):not(#v7):not(#v8):not(#v9):not(#v10):not(#v11):not(#v12):not(#v13):not(#v14):not(#v15):not(#v16):not(#v17):not(#v18):not(#v19):not(#v20):not(#v21):not(#v22):not(#v23):not(#v24):not(#v25):not(#v26):not(#v27):not(#v28):not(#v29):not(#v30):not(#v31):not(#v32) body .screen .pb-flyer img{filter:grayscale(1) brightness(.82) contrast(1.15)}
 
+/* ===== Listen: lyrics button + karaoke sheet ===== */
+.np-art{position:relative}
+.np-ly{position:absolute;top:12px;right:12px;z-index:3;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px 0 11px;border-radius:999px;border:0;font:inherit;font-weight:800;font-size:13.5px;color:var(--fg);background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 16px -10px rgba(20,22,30,.45),inset 0 0 0 1px rgba(255,255,255,.7);cursor:pointer;transition:transform .15s}
+:root[data-theme="dark"] .np-ly{background:rgba(40,42,50,.8);box-shadow:0 6px 16px -10px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.08)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .np-ly{background:rgba(40,42,50,.8);box-shadow:0 6px 16px -10px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.08)}}
+.np-ly svg{width:18px;height:18px}
+.np-ly:active{transform:scale(.94)}
+.ly-sheet .ts-card{max-height:86%;gap:12px!important;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.ly-head{display:flex;align-items:center;gap:12px}
+.ly-art{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;overflow:hidden;background:var(--surface-2)}
+.ly-art svg{width:34px;height:34px}
+.ly-t{flex:1;min-width:0;display:flex;flex-direction:column}
+.ly-t b{font-size:16.5px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ly-t span{font-size:12.5px;color:var(--muted)}
+.ly-x{width:38px;height:38px;flex:none;border-radius:50%;border:0;display:grid;place-items:center;background:var(--surface-2);color:var(--fg);cursor:pointer}
+.ly-x svg{width:18px;height:18px}
+.ly-list{position:relative;flex:1;min-height:0;max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding:6px 2px 30vh;mask-image:linear-gradient(180deg,transparent 0,#000 18px,#000 calc(100% - 40px),transparent)}
+.ly-l{all:unset;box-sizing:border-box;cursor:pointer;padding:10px 12px;border-radius:14px;font-family:var(--f-display);font-size:19px;line-height:1.4;font-weight:700;color:var(--faint);transition:color .25s,background .25s,transform .25s;transform-origin:left center}
+.ly-l.past{color:var(--muted)}
+.ly-l.now{color:var(--fg);background:var(--surface-2);transform:scale(1.02)}
+.ly-l:active{background:var(--surface-2)}
+.ly-ctrl{display:flex;align-items:center;justify-content:center;gap:22px;padding-top:4px}
+.ly-ctrl .round{width:50px;height:50px}
+.ly-ctrl .play{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
+.ly-ctrl .play svg{width:26px;height:26px}
+
 /* ===== One bean per stage: đậu đỏ, đậu xanh, đậu ngự, đậu cô ve, đậu Hà Lan ===== */
 html:not(#b1):not(#b2):not(#b3):not(#b4):not(#b5):not(#b6):not(#b7):not(#b8):not(#b9):not(#b10):not(#b11):not(#b12):not(#b13):not(#b14):not(#b15):not(#b16):not(#b17):not(#b18):not(#b19):not(#b20):not(#b21):not(#b22):not(#b23):not(#b24):not(#b25):not(#b26):not(#b27):not(#b28):not(#b29):not(#b30):not(#b31):not(#b32):not(#b33):not(#b34):not(#b35):not(#b36):not(#b37):not(#b38):not(#b39):not(#b40):not(#b41):not(#b42):not(#b43):not(#b44):not(#b45):not(#b46):not(#b47):not(#b48):not(#b49):not(#b50):not(#b51) body :is(.mt-stage,.mt-soon-it).bn0 .pb{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23F6EFE6'/%3E%3Cstop offset='.55' stop-color='%23E7DBCB'/%3E%3Cstop offset='1' stop-color='%23CDBDA6'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFFFFF'/%3E%3C/svg%3E") center/100% 100% no-repeat!important}
 html:not(#b1):not(#b2):not(#b3):not(#b4):not(#b5):not(#b6):not(#b7):not(#b8):not(#b9):not(#b10):not(#b11):not(#b12):not(#b13):not(#b14):not(#b15):not(#b16):not(#b17):not(#b18):not(#b19):not(#b20):not(#b21):not(#b22):not(#b23):not(#b24):not(#b25):not(#b26):not(#b27):not(#b28):not(#b29):not(#b30):not(#b31):not(#b32):not(#b33):not(#b34):not(#b35):not(#b36):not(#b37):not(#b38):not(#b39):not(#b40):not(#b41):not(#b42):not(#b43):not(#b44):not(#b45):not(#b46):not(#b47):not(#b48):not(#b49):not(#b50):not(#b51) body :is(.mt-stage,.mt-soon-it).bn0 .pb:is(.done,.cur,.jump){background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E") center/100% 100% no-repeat!important;color:#fff!important;--beanmask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E");--beanline:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2.4 -2.4 88.8 72.8'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29' stroke='%23ffffff' stroke-width='2.2' stroke-linejoin='round' paint-order='stroke'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E")}
@@ -7019,7 +7045,7 @@ function viewListen(v){
   v.innerHTML=`
   <div class="minis">${PASSAGES.map(p=>`<button class="mini ${p.tile}" data-p="${p.id}" aria-pressed="${p.id===curP}"><span class="ma ${p.tile}">${ART[p.art]}</span><span><b>${p.title}</b><span>${p.level} · ${p.topic}</span></span></button>`).join('')}</div>
   <section class="np" id="np">
-    <div class="np-art ${P.tile}"><span class="chip">${P.level} · ${P.topic}</span>${ART[P.art]}<span class="np-bird">${MASCOT('','listen')}</span></div>
+    <div class="np-art ${P.tile}"><span class="chip">${P.level} · ${P.topic}</span>${ART[P.art]}<span class="np-bird">${MASCOT('','listen')}</span><button class="np-ly" id="np-ly" aria-label="Xem lời bài nghe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h11M4 11h11M4 16h7"/><path d="M19 5v9.5"/><circle cx="17" cy="15.5" r="2.2"/></svg><span>Lời</span></button></div>
     <div class="np-meta"><div style="min-width:0"><b>${P.title}</b><span>${sents.length} câu · giọng ${S.accent==='uk'?'Anh–Anh':'Anh–Mỹ'}</span></div></div>
     <div class="wave" id="wave">${bars}</div>
     <div class="np-ctrl">
@@ -7043,13 +7069,30 @@ function viewListen(v){
   $$('[data-p]',v).forEach(b=>b.onclick=()=>{curP=b.dataset.p;go('listen',true)});
   v.insertAdjacentHTML('beforeend',voaBoxHTML()); loadVOA(v);
   const tx=$('#tx'), np=$('#np'), waveBars=$$('#wave i'); let playing=false, cur=0;
-  const mark=i=>{$$('.sent',tx).forEach(s=>s.classList.toggle('now',+s.dataset.i===i)); const upto=i<0?0:Math.round((i+1)/sents.length*waveBars.length); waveBars.forEach((b,k)=>b.classList.toggle('p',k<upto))};
-  const setPlay=on=>{playing=on;np.classList.toggle('playing',on);$('#playall').innerHTML=on?I.stop:I.play};
+  let ly=null;
+  const lyMark=i=>{if(!ly)return; $$('.ly-l',ly).forEach(l=>l.classList.toggle('now',+l.dataset.i===i)); $$('.ly-l',ly).forEach(l=>l.classList.toggle('past',+l.dataset.i<i)); const n=ly.querySelector('.ly-l.now'); if(n){const box=ly.querySelector('.ly-list'); box.scrollTo({top:n.offsetTop-box.clientHeight/2+n.offsetHeight/2,behavior:'smooth'})}};
+  const mark=i=>{$$('.sent',tx).forEach(s=>s.classList.toggle('now',+s.dataset.i===i)); const upto=i<0?0:Math.round((i+1)/sents.length*waveBars.length); waveBars.forEach((b,k)=>b.classList.toggle('p',k<upto)); lyMark(i)};
+  const setPlay=on=>{playing=on;np.classList.toggle('playing',on);$('#playall').innerHTML=on?I.stop:I.play; if(ly){ly.classList.toggle('playing',on); ly.querySelector('#ly-play').innerHTML=on?I.stop:I.play}};
+  const openLy=()=>{ if(ly)return; ly=document.createElement('div'); ly.className='tsheet ly-sheet';
+    ly.innerHTML=`<div class="ts-back"></div><div class="ts-card"><div class="ts-grab"></div>
+      <div class="ly-head"><span class="ly-art ${P.tile}">${ART[P.art]}</span><div class="ly-t"><b>${esc(P.title)}</b><span>${P.level} · ${esc(P.topic)} · chạm 1 câu để nghe từ đó</span></div><button class="ly-x" aria-label="Đóng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="ly-list">${sents.map((t,i)=>`<button class="ly-l" data-i="${i}">${esc(t)}</button>`).join('')}</div>
+      <div class="ly-ctrl"><button class="round" id="ly-prev" aria-label="Câu trước"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5.5v13a1 1 0 0 1-1.5.86L9 13.2a1.4 1.4 0 0 1 0-2.4l9.5-6.16A1 1 0 0 1 20 5.5z"/></svg></button><button class="play" id="ly-play" aria-label="Phát">${playing?I.stop:I.play}</button><button class="round" id="ly-next" aria-label="Câu sau"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5.5v13a1 1 0 0 0 1.5.86L15 13.2a1.4 1.4 0 0 0 0-2.4L5.5 4.64A1 1 0 0 0 4 5.5z"/></svg></button></div></div>`;
+    ($('#screen')||document.body).appendChild(ly); ly.classList.toggle('playing',playing);
+    try{const pc=getComputedStyle($('#playall')),lp=ly.querySelector('#ly-play'); ['background','color','box-shadow','border'].forEach(k=>lp.style.setProperty(k,pc.getPropertyValue(k)))}catch(e){}
+    const close=()=>{const el=ly; ly=null; el.classList.add('out'); setTimeout(()=>el.remove(),240)};
+    ly.querySelector('.ts-back').onclick=close; ly.querySelector('.ly-x').onclick=close;
+    ly.querySelector('#ly-play').onclick=()=>$('#playall').click();
+    ly.querySelector('#ly-prev').onclick=()=>$('#prev').click(); ly.querySelector('#ly-next').onclick=()=>$('#nextS').click();
+    $$('.ly-l',ly).forEach(l=>l.onclick=()=>{hush(); setPlay(false); setTimeout(()=>run(+l.dataset.i),60)});
+    lyMark(playing||cur>0?Math.min(cur,sents.length-1):-1);
+    if(!playing)run(cur>=sents.length?0:cur)};
   const run=async from=>{setPlay(true);for(cur=from;cur<sents.length&&playing;cur++){mark(cur);await say(sents[cur])} if(playing){cur=0;setPlay(false)}};
   const setTx=(show,scroll)=>{tx.classList.toggle('hide',!show); const h=$('#tx-hint'); if(h)h.textContent=show?'Chạm 1 câu để nghe lại câu đó.':'Lời đang ẩn để bạn tập nghe trước. Chạm vào đây hoặc bấm “Hiện lời” để xem.';
     ['#reveal','#reveal2'].forEach(id=>{const b=$(id); if(b){b.setAttribute('aria-pressed',String(show)); b.innerHTML=(show?I.eyeoff:I.eye)+'<span>'+(show?'Ẩn lời':'Hiện lời')+'</span>'}});
     if(show&&scroll)tx.closest('section').scrollIntoView({behavior:'smooth',block:'start'})};
   $('#reveal2').onclick=()=>setTx(tx.classList.contains('hide'),false);
+  $('#np-ly').onclick=openLy;
   $('#tx-hint').onclick=()=>{if(tx.classList.contains('hide'))setTx(true,false)};
   tx.addEventListener('click',e=>{if(tx.classList.contains('hide')){e.stopPropagation();e.preventDefault();setTx(true,false)}},true);
   $('#playall').onclick=()=>{if(playing){setPlay(false);hush()}else run(cur>=sents.length?0:cur)};
@@ -8212,7 +8255,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v426';
+const APP_V='elocu-v428';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
