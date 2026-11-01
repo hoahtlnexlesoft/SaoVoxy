@@ -5132,6 +5132,7 @@ html:not(#k1):not(#k2):not(#k3):not(#k4):not(#k5):not(#k6):not(#k7):not(#k8):not
 html:not(#k1):not(#k2):not(#k3):not(#k4):not(#k5):not(#k6):not(#k7):not(#k8):not(#k9):not(#k10):not(#k11):not(#k12):not(#k13):not(#k14):not(#k15):not(#k16):not(#k17):not(#k18):not(#k19):not(#k20):not(#k21):not(#k22):not(#k23):not(#k24):not(#k25):not(#k26):not(#k27):not(#k28):not(#k29):not(#k30):not(#k31):not(#k32):not(#k33):not(#k34):not(#k35):not(#k36):not(#k37):not(#k38):not(#k39):not(#k40):not(#k41):not(#k42):not(#k43):not(#k44):not(#k45):not(#k46):not(#k47):not(#k48):not(#k49):not(#k50):not(#k51):not(#k52):not(#k53):not(#k54):not(#k55):not(#k56):not(#k57):not(#k58):not(#k59):not(#k60):not(#k61):not(#k62):not(#k63):not(#k64):not(#k65):not(#k66):not(#k67):not(#k68):not(#k69):not(#k70):not(#k71):not(#k72):not(#k73):not(#k74):not(#k75):not(#k76):not(#k77):not(#k78):not(#k79):not(#k80):not(#k81):not(#k82):not(#k83):not(#k84):not(#k85):not(#k86):not(#k87):not(#k88):not(#k89):not(#k90):not(#k91):not(#k92):not(#k93):not(#k94):not(#k95):not(#k96):not(#k97):not(#k98):not(#k99):not(#k100):not(#k101):not(#k102):not(#k103):not(#k104):not(#k105):not(#k106):not(#k107):not(#k108):not(#k109):not(#k110):not(#k111):not(#k112):not(#k113):not(#k114):not(#k115):not(#k116):not(#k117):not(#k118):not(#k119):not(#k120):not(#k121) body .pb.cur .pb-bird{animation:none!important;transform:none!important;width:84px!important;height:78px!important;left:34%!important;margin-left:-42px!important;top:-70px!important}
 .pb.cur .pb-bird .pb-peck{width:100%;height:auto;display:block}
 html body .pb.cur .pb-spk{display:none!important}
+html body .pb.cur .pb-bird{display:none!important}
 /* ===== edge twigs + flying Sáo on the lesson path ===== */
 .pb-twig{position:absolute;top:56px;width:128px;height:60px;pointer-events:none;z-index:0}
 .pb-twig svg{width:100%;height:100%;overflow:visible;display:block}
@@ -7484,7 +7485,7 @@ function SAO_SLIM(){const P=BIRD_PAL[BIRD]||BIRD_PAL.violet, ink=P.ink||'#2B1F5E
 function PB_TWIG(side,k){const lv=(x,y,r,s)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M0 0C3-7.4 10-10.4 17-9.6 23-8.6 27.4-4.4 31 0 27.4 4.4 23 8.6 17 9.6 10 10.4 3 7.4 0 0z" fill="#6F9A5E"/><path d="M1.5 0H29" stroke="#E9F0DF" stroke-opacity=".55" stroke-width="1"/></g>`;
   const br=(x,y,r,s,c)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})">${[-40,40,0].map(a=>`<path transform="rotate(${a})" d="M0 0C-6.4-1.6-13.4-6.6-14-13.6-14.4-18.4-10.6-22.6-6.6-26-4.2-28-1.8-30.6 0-34 1.8-30.6 4.2-28 6.6-26 10.6-22.6 14.4-18.4 14-13.6 13.4-6.6 6.4-1.6 0 0z" fill="${c}"/>`).join('')}<circle cy="-12" r="2.2" fill="#FFF6E0"/></g>`;
   const C=['#B98AF0','#A974E8','#C69CF4','#E35FB4'][k%4];
-  return `<span class="pb-twig ${side}" aria-hidden="true"><svg viewBox="0 0 150 70"><path d="M-6 44C30 38 66 34 112 30c8-1 14-3 18-6" stroke="#7A5232" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M-6 41C30 35 66 31 112 27" stroke="#A97A4E" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/><path d="M58 35c6 8 8 16 6 24M92 32c4-9 10-14 18-16" stroke="#7A5232" stroke-width="3" fill="none" stroke-linecap="round"/>${lv(20,42,150,.5)}${lv(46,37,-30,.55)}${lv(64,58,110,.45)}${lv(110,16,-60,.42)}${lv(126,26,20,.5)}${lv(80,34,160,.45)}${br(64,62,170,.38,C)}${br(112,16,-30,.36,C)}${br(30,44,-160,.32,'#C69CF4')}</svg></span>`}
+  return `<span class="pb-twig ${side}" aria-hidden="true"><svg viewBox="0 0 150 70"><path d="M-6 44C30 38 66 34 112 30c8-1 14-3 18-6" stroke="#7A5232" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M-6 41C30 35 66 31 112 27" stroke="#A97A4E" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/><path d="M58 35c6 8 8 16 6 24M92 32c4-9 10-14 18-16" stroke="#7A5232" stroke-width="3" fill="none" stroke-linecap="round"/>${lv(20,42,150,.5)}${lv(46,37,-30,.55)}${lv(64,58,110,.45)}${lv(110,16,-60,.42)}${lv(126,26,20,.5)}${lv(80,34,160,.45)}${br(64,62,170,.38,C)}${br(112,16,-30,.36,C)}${br(30,44,-160,.32,'#C69CF4')}<circle class="tw-perch" cx="86" cy="30.5" r=".6" fill="none"/></svg></span>`}
 /* chubby side-view Sáo in full flight: wings up, eyes squeezed happy, beak open, tail fanned, feet tucked */
 function SAO_FLY(){const P=BIRD_PAL[BIRD]||BIRD_PAL.violet, ink=P.ink||'#2B1F5E', id='fy'+(SAO_FLY.n=(SAO_FLY.n||0)+1);
   const W='M62 54C54 46 44 40 34 36c-6-2-10-7-7-11 2-3 6-3 9-1-4-4-3-9 1-10 3-1 6 0 8 3-2-5 0-9 4-10 4 0 6 3 6 6 0-5 3-8 7-7 4 1 5 5 4 9 3-3 7-2 8 1 2 4 0 8-4 10 3 0 6 3 5 6-1 4-4 6-8 6 4 2 4 6 2 9z';
@@ -7596,17 +7597,17 @@ const STAGE_COL=['--sc:#8A72F5;--sc2:#C3B5FF;--scd:#6650D6','--sc:#F06A97;--sc2:
 const ROUND_IC=['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.4C10.1 5 7.6 4.4 4.6 4.6 3.7 4.7 3 5.4 3 6.3v10.9c0 1 .8 1.7 1.8 1.6 2.7-.1 5 .5 7.2 1.9z" fill="currentColor" stroke="none"/><path d="M12 6.4c1.9-1.4 4.4-2 7.4-1.8.9.1 1.6.8 1.6 1.7v10.9c0 1-.8 1.7-1.8 1.6-2.7-.1-5 .5-7.2 1.9z" fill="currentColor" stroke="none" opacity=".62"/><path d="M14.6 9.4c1.2-.4 2.5-.6 3.9-.5M14.6 12.6c1.2-.4 2.5-.6 3.9-.5" stroke-width="1.6"/></svg>','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path fill-rule="evenodd" d="M12 2.4a3.6 3.6 0 0 1 3.6 3.6v5.2a3.6 3.6 0 0 1-7.2 0V6A3.6 3.6 0 0 1 12 2.4zM10.6 6.6h2.8M10.6 9.4h2.8" fill="currentColor" stroke="none"/><path d="M5.4 11.2a6.6 6.6 0 0 0 13.2 0M12 17.8v3.4M9 21.2h6"/></svg>','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 14.6v-2.2a7.8 7.8 0 0 1 15.6 0v2.2"/><rect x="2.6" y="13" width="5.6" height="8.2" rx="2.6" fill="currentColor" stroke="none"/><rect x="15.8" y="13" width="5.6" height="8.2" rx="2.6" fill="currentColor" stroke="none"/></svg>'];
 const PB_LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10.6V8.2a4 4 0 0 1 8 0v2.4"/><path fill-rule="evenodd" d="M7.6 10.4h8.8a3.2 3.2 0 0 1 3.2 3.2v4.4a3.2 3.2 0 0 1-3.2 3.2H7.6A3.2 3.2 0 0 1 4.4 18v-4.4a3.2 3.2 0 0 1 3.2-3.2zM12 14.1a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 1 0 0-3.2z" fill="currentColor" stroke="none"/></svg>';
 /* one Sáo hops between the edge twigs on the lesson path: perches, looks around, then flies to another visible twig */
-function pbFlyer(v){const map=$('.mt-map',v); if(!map)return; const twigs=$$('.pb-twig',map); if(twigs.length<2)return;
+function pbFlyer(v){const map=$('.mt-map',v); if(!map)return; const bean=$('.pb.cur',map), twigs=[...$$('.pb-twig',map),...(bean?[bean]:[])]; if(twigs.length<2)return;
   const b=document.createElement('div'); b.className='pb-flyer'; b.innerHTML='<img class="fy-perch" src="media/sao-peck.webp" alt=""><img class="fy-fly" src="media/sao-fly.webp" alt="">'; map.appendChild(b);
   const AX=41,AY=75, still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const spot=t=>{const mr=map.getBoundingClientRect(), r=t.getBoundingClientRect(), right=t.classList.contains('tr'); return {x:(right?r.right-r.width*.58:r.left+r.width*.58)-mr.left, y:r.top-mr.top+r.height*.47, face:right?-1:1}};
+  const spot=t=>{const mr=map.getBoundingClientRect(); if(t===bean){const r=t.getBoundingClientRect(); return {x:r.left+r.width*.38-mr.left, y:r.top+r.height*.1-mr.top, face:1}} const m=t.querySelector('.tw-perch').getBoundingClientRect(), right=t.classList.contains('tr'); return {x:m.left+m.width/2-mr.left, y:m.top+m.height/2-mr.top, face:right?-1:1}};
   const vis=t=>{const r=t.getBoundingClientRect(), vh=innerHeight; return r.bottom>60&&r.top<vh-90};
-  let cur=twigs.find(vis)||twigs[0], p=spot(cur), face=p.face, mode='perch', until=performance.now()+1500, F=null, raf;
+  let cur=(bean&&vis(bean))?bean:(twigs.find(vis)||twigs[0]), p=spot(cur), face=p.face, mode='perch', until=performance.now()+(cur===bean?7000:1500), F=null, raf;
   const put=(x,y,f,tilt=0)=>{b.style.transform=`translate(${(x-AX).toFixed(1)}px,${(y-AY).toFixed(1)}px) rotate(${tilt.toFixed(1)}deg) scaleX(${f})`};
   put(p.x,p.y,face);
   const loop=now=>{if(!b.isConnected)return cancelAnimationFrame(raf);
     if(mode==='perch'){p=spot(cur); put(p.x,p.y,face);
-      if(now>until&&!still){const opts=twigs.filter(t=>t!==cur&&vis(t)); const other=opts.filter(t=>t.classList.contains('tr')!==cur.classList.contains('tr')); const near=other.length?other:opts;
+      if(now>until&&!still){const opts=twigs.filter(t=>t!==cur&&vis(t)); const tw=opts.filter(t=>t!==bean), other=tw.filter(t=>t.classList.contains('tr')!==cur.classList.contains('tr')); const near=(cur!==bean&&opts.includes(bean)&&Math.random()<.55)?[bean]:(other.length?other:(tw.length?tw:opts));
         const nx=near[Math.floor(Math.random()*near.length)]; if(!nx)until=now+1200; else{F={from:cur,to:nx,t:0,dur:2600+Math.random()*900,sw:(Math.random()<.5?-1:1)}; mode='fly'; b.classList.add('fly'); b.classList.remove('land')}}}
     else{const a=spot(F.from), z=spot(F.to); F.t=Math.min(1,F.t+16.7/F.dur); const t=F.t, e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
       const W2=map.clientWidth, vTop=-map.getBoundingClientRect().top+70, my=Math.max(vTop,Math.min(a.y,z.y)-Math.max(110,Math.abs(z.y-a.y)*.3+90));
@@ -7616,7 +7617,7 @@ function pbFlyer(v){const map=$('.mt-map',v); if(!map)return; const twigs=$$('.p
       const x=x0, y=y0+wave, dx=x-(F.px??x); F.px=x; if(Math.abs(dx)>.4)face=dx>0?1:-1;
       const flapOn=!(t>.5&&t<.62)&&t<.9; b.classList.toggle('glide',!flapOn);
       put(x,y,face,(t<.2?-18:t>.85?6:-6)*face);
-      if(t>=1){cur=F.to; face=spot(cur).face; mode='perch'; b.classList.remove('glide'); until=now+2600+Math.random()*2200; b.classList.remove('fly'); b.classList.add('land')}}
+      if(t>=1){cur=F.to; face=spot(cur).face; mode='perch'; b.classList.remove('glide'); until=now+(cur===bean?8000+Math.random()*4000:2600+Math.random()*2200); b.classList.remove('fly'); b.classList.add('land')}}
     raf=requestAnimationFrame(loop)};
   raf=requestAnimationFrame(loop)}
 function viewLessons(v){
@@ -8051,7 +8052,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v408';
+const APP_V='elocu-v410';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
