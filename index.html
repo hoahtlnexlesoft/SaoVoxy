@@ -5405,7 +5405,7 @@ html[data-theme="dark"]:not(#r1):not(#r2):not(#r3):not(#r4):not(#r5):not(#r6):no
 /* ===== Intro in Xám Lông Sáo: gold title accent, graphite controls ===== */
 html[data-palette="vivid"]:not(#z1):not(#z2):not(#z3):not(#z4) .fz-card h2 em{background:linear-gradient(90deg,#F5B92E,#E39A00)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
 html[data-palette="vivid"]:not(#z1):not(#z2):not(#z3):not(#z4) .fz-snd{color:#24262D!important}
-html[data-palette="vivid"]:not(#z1):not(#z2):not(#z3):not(#z4) .fz-brand .in-logo{border-radius:12px;overflow:hidden;background:#F1F1F4;box-shadow:inset 0 0 0 1px rgba(28,30,38,.06)}
+html[data-palette="vivid"]:not(#z1):not(#z2):not(#z3):not(#z4) .fz-brand .in-logo{border-radius:50%;overflow:hidden;background:linear-gradient(150deg,#FFE7A3,#F9CF5C);box-shadow:0 4px 10px -6px rgba(200,140,0,.6)}
 
 /* ===== One bean per stage: đậu đỏ, đậu xanh, đậu ngự, đậu cô ve, đậu Hà Lan ===== */
 html:not(#b1):not(#b2):not(#b3):not(#b4):not(#b5):not(#b6):not(#b7):not(#b8):not(#b9):not(#b10):not(#b11):not(#b12):not(#b13):not(#b14):not(#b15):not(#b16):not(#b17):not(#b18):not(#b19):not(#b20):not(#b21):not(#b22):not(#b23):not(#b24):not(#b25):not(#b26):not(#b27):not(#b28):not(#b29):not(#b30):not(#b31):not(#b32):not(#b33):not(#b34):not(#b35):not(#b36):not(#b37):not(#b38):not(#b39):not(#b40):not(#b41):not(#b42):not(#b43):not(#b44):not(#b45):not(#b46):not(#b47):not(#b48):not(#b49):not(#b50):not(#b51) body :is(.mt-stage,.mt-soon-it).bn0 .pb{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23F6EFE6'/%3E%3Cstop offset='.55' stop-color='%23E7DBCB'/%3E%3Cstop offset='1' stop-color='%23CDBDA6'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFFFFF'/%3E%3C/svg%3E") center/100% 100% no-repeat!important}
@@ -8335,7 +8335,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v457';
+const APP_V='elocu-v459';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8534,7 +8534,7 @@ function introSlides(done){
   /* flat illustration bougainvillea (like the reference): teardrop bract, maroon twig with a white bud dot */
   const BR='M0 0C-6.4-1.6-13.4-6.6-14-13.6-14.4-18.4-10.6-22.6-6.6-26-4.2-28-1.8-30.6 0-34 1.8-30.6 4.2-28 6.6-26 10.6-22.6 14.4-18.4 14-13.6 13.4-6.6 6.4-1.6 0 0z';
   const VN='M0-2.5V-17';
-  const PINK=document.documentElement.dataset.palette==='vivid'?['#F07AA8','#F590B8','#E8659A','#F7A6C4','#EE86B0','#E35FB4']:['#A974E8','#B98AF0','#9A62E0','#C69CF4','#AE7AEC','#E35FB4'];
+  const PINK=document.documentElement.dataset.palette==='vivid'?['#F7A6C4','#F590B8','#FBC4D6','#F07AA8','#F9B3CB','#EE86B0']:['#A974E8','#B98AF0','#9A62E0','#C69CF4','#AE7AEC','#E35FB4'];
   /* paper bougainvillea (like the reference photo): three papery heart-shaped bracts, fine veins, maroon tubes and a tiny cream star flower */
   const bract=(x,y,r,s,c,k,side)=>{const one=(rot,sc)=>`<g transform="rotate(${rot}) scale(${sc})"><path d="${BR}" fill="url(#bg${k})"/><path d="M0-1.5C-.4-11-.2-21 0-31" stroke="#5E33A6" stroke-opacity=".4" stroke-width=".8" fill="none"/><path d="M-.2-8C-3-10.6-6-13.6-8-18M.2-14.6C3-17 5.2-20 6.4-23.6M-.2-19C-2.2-21-3.6-23-4.4-25" stroke="#5E33A6" stroke-opacity=".28" stroke-width=".6" fill="none" stroke-linecap="round"/><path d="M-7-12C-5.6-16-3.6-19-1.6-21" stroke="#fff" stroke-opacity=".28" stroke-width="1" fill="none" stroke-linecap="round"/></g>`;
     const tube=a=>`<path d="M0-1C${(a*.4).toFixed(1)}-7 ${(a*.8).toFixed(1)}-13 ${a.toFixed(1)}-19" stroke="#7A2E7E" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="${a.toFixed(1)}" cy="-19" r=".9" fill="#8E3A92"/>`;
