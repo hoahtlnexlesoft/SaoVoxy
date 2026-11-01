@@ -5321,7 +5321,9 @@ html[data-palette="vivid"]:not(#v1):not(#v2):not(#v3):not(#v4):not(#v5):not(#v6)
 .ly-list{position:relative;flex:1;min-height:0;max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding:6px 2px 30vh;mask-image:linear-gradient(180deg,transparent 0,#000 18px,#000 calc(100% - 40px),transparent)}
 .ly-l{all:unset;box-sizing:border-box;cursor:pointer;padding:10px 12px;border-radius:14px;font-family:var(--f-display);font-size:19px;line-height:1.4;font-weight:700;color:var(--faint);transition:color .25s,background .25s,transform .25s;transform-origin:left center}
 .ly-l.past{color:var(--muted)}
-.ly-l.now{color:var(--fg);background:var(--surface-2);transform:scale(1.02)}
+.ly-l.now{color:var(--ink);transform:none}
+.ly-l>span{padding:.04em .18em;margin:0 -.18em;border-radius:7px;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background .25s}
+.ly-l.now>span{background:var(--yellow-bg,var(--sun))}
 .ly-l:active{background:var(--surface-2)}
 .ly-ctrl{display:flex;align-items:center;justify-content:center;gap:22px;padding-top:4px}
 .ly-ctrl .round{width:50px;height:50px}
@@ -7100,7 +7102,7 @@ function viewListen(v){
   const openLy=()=>{ if(ly)return; ly=document.createElement('div'); ly.className='tsheet ly-sheet';
     ly.innerHTML=`<div class="ts-back"></div><div class="ts-card"><div class="ts-grab"></div>
       <div class="ly-head"><span class="ly-art ${P.tile}">${ART[P.art]}</span><div class="ly-t"><b>${esc(P.title)}</b><span>${P.level} · ${esc(P.topic)} · chạm 1 câu để nghe từ đó</span></div><button class="ly-x" aria-label="Đóng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-      <div class="ly-list">${sents.map((t,i)=>`<button class="ly-l" data-i="${i}">${esc(t)}</button>`).join('')}</div>
+      <div class="ly-list">${sents.map((t,i)=>`<button class="ly-l" data-i="${i}"><span>${esc(t)}</span></button>`).join('')}</div>
       <div class="ly-ctrl"><button class="round" id="ly-prev" aria-label="Câu trước"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5.5v13a1 1 0 0 1-1.5.86L9 13.2a1.4 1.4 0 0 1 0-2.4l9.5-6.16A1 1 0 0 1 20 5.5z"/></svg></button><button class="play" id="ly-play" aria-label="Phát">${playing?I.stop:I.play}</button><button class="round" id="ly-next" aria-label="Câu sau"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5.5v13a1 1 0 0 0 1.5.86L15 13.2a1.4 1.4 0 0 0 0-2.4L5.5 4.64A1 1 0 0 0 4 5.5z"/></svg></button></div></div>`;
     ($('#screen')||document.body).appendChild(ly); ly.classList.toggle('playing',playing);
     try{const pc=getComputedStyle($('#playall')),lp=ly.querySelector('#ly-play'); ['background','color','box-shadow','border'].forEach(k=>lp.style.setProperty(k,pc.getPropertyValue(k)))}catch(e){}
@@ -8279,7 +8281,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v437';
+const APP_V='elocu-v438';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
