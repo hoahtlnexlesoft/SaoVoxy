@@ -6713,17 +6713,19 @@ function vHash(t){t=String(t||'').replace(/\s+/g,' ').trim().toLowerCase(); let 
 function vLoad(){let ic=false; try{ic=inClaude}catch(e){} if(VLIB.set||VLIB.loading||ic)return; VLIB.loading=1;
   fetch('/v/manifest.json').then(r=>r.ok?r.json():[]).then(a=>{VLIB.set=new Set(a)}).catch(()=>{VLIB.set=new Set()})}
 setTimeout(vLoad,0);
-function sayLib(text,rate){const h=vHash(text); if(!VLIB.set||!VLIB.set.has(h)||VLIB.bad>2)return null;
+let SAYGEN=0;
+function sayLib(text,rate,g){const fb=()=>g===SAYGEN?sayDevice(text,rate):Promise.resolve(); const h=vHash(text); if(!VLIB.set||!VLIB.set.has(h)||VLIB.bad>2)return null;
   return new Promise(res=>{try{aiStop(); try{speechSynthesis.cancel()}catch(e){}
     const a=AIV.el||(AIV.el=new Audio()); a.muted=false; a.volume=1; a.src='/v/'+h+'.m4a?r=3'; a.preservesPitch=true; a.playbackRate=Math.max(.5,Math.min(1.5,(rate??S.rate??1)));
-    let ok=false; a.onplaying=()=>{ok=true; ttsOK=true}; a.onended=()=>res(); a.onerror=()=>{VLIB.bad++; res(sayDevice(text,rate))};
-    const p=a.play(); p&&p.catch&&p.catch(()=>{if(!ok)res(sayDevice(text,rate))})}catch(e){res(sayDevice(text,rate))}})}
+    let ok=false; a.onplaying=()=>{ok=true; ttsOK=true}; a.onended=()=>res(); a.onerror=()=>{if(g!==SAYGEN)return res(); VLIB.bad++; res(fb())};
+    const p=a.play(); p&&p.catch&&p.catch(()=>{if(!ok)res(fb())})}catch(e){res(fb())}})}
 /* decide synchronously so playback starts inside the tap (iOS drops audio started after an await) */
 function say(text,rate){
   try{stopRec(true)}catch(e){} audioMode('playback');
-  if(!AIV.cute){const lib=sayLib(text,rate); if(lib)return lib}
+  const g=++SAYGEN;
+  if(!AIV.cute){const lib=sayLib(text,rate,g); if(lib)return lib}
   if(!(aiVoiceOn()&&text&&text.length<=400))return sayDevice(text,rate);
-  if(AIV.ready.has(ttsURL(text)))return sayAI(text,rate).catch(()=>sayDevice(text,rate));
+  if(AIV.ready.has(ttsURL(text)))return sayAI(text,rate).catch(()=>g===SAYGEN?sayDevice(text,rate):undefined);
   aiBlob(text).then(()=>AIV.ready.add(ttsURL(text))).catch(()=>{});
   return sayDevice(text,rate)}
 function sayDevice(text,rate){return new Promise(res=>{
@@ -6954,7 +6956,7 @@ async function probeMic(){
   try{if(window.self!==window.top&&!document.featurePolicy?.allowsFeature?.('microphone')){micState='blocked';return 'blocked'}}catch(e){}
   return micState;
 }
-function hush(){aiStop(); if(hasTTS)try{speechSynthesis.cancel()}catch(e){}}
+function hush(){SAYGEN++; aiStop(); if(hasTTS)try{speechSynthesis.cancel()}catch(e){}}
 
 /* ---------- Speech in ---------- */
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -8038,6 +8040,7 @@ function runLesson(v,u,round=0){
   const needsMic=round===1;
   if(needsMic)probeMic().then(m=>{if(m==='none'||m==='blocked')showAlert('mic',m)});
   const step=()=>{
+    try{hush()}catch(e){}
     if(k>=ex.length)return finish();
     const e=ex[k]; let chosen=null, built=[], checkReady=()=>false, isRight=()=>false, answerText='', answerHTML='', afterCheck=null;
     v.innerHTML=`<div class="lesson">
@@ -8369,7 +8372,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v475';
+const APP_V='elocu-v476';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
