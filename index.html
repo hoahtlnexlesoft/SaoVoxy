@@ -5204,6 +5204,22 @@ html body .pb.cur .pb-bird{display:none!important}
 .pb-flyer.land .fy-art{animation:flLand .38s ease-out}
 @media (prefers-reduced-motion:reduce){.pb-twig svg,.pb-flyer *{animation:none!important}}
 
+/* ===== install nudge (Today) + simple install sheet ===== */
+.inst-card{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:12px 14px;border-radius:22px;background:linear-gradient(150deg,rgba(255,255,255,.85),rgba(240,234,255,.85));border:1px solid rgba(122,96,230,.18);box-shadow:0 10px 24px -18px rgba(60,40,140,.5)}
+.inst-card .ic-bird{width:46px;height:46px;flex:none}
+.inst-card .ic-bird svg{width:100%;height:100%}
+.inst-card .ic-t{flex:1;min-width:150px;display:flex;flex-direction:column;gap:2px}
+.inst-card .ic-t b{font-size:15px}
+.inst-card .ic-t span{font-size:13px;color:var(--muted,#6F6A88)}
+.inst-card .ic-act{display:flex;gap:8px;width:100%;justify-content:flex-end}
+.inst-card .btn{padding:9px 14px;font-size:13.5px}
+.ig-simple{list-style:none;padding:0;margin:10px 0;display:flex;flex-direction:column;gap:12px}
+.ig-simple li{display:flex;gap:12px;align-items:center}
+.ig-simple .ig-dot{width:40px;height:40px;flex:none;border-radius:13px;display:grid;place-items:center;background:#F0EBFF;color:#6A50D8}
+.ig-simple .ig-dot svg{width:22px;height:22px}
+.ig-simple li div{display:flex;flex-direction:column;gap:2px}
+.ig-simple li span{font-size:13px;color:var(--muted,#6F6A88)}
+
 /* ===== One bean per stage: đậu đỏ, đậu xanh, đậu ngự, đậu cô ve, đậu Hà Lan ===== */
 html:not(#b1):not(#b2):not(#b3):not(#b4):not(#b5):not(#b6):not(#b7):not(#b8):not(#b9):not(#b10):not(#b11):not(#b12):not(#b13):not(#b14):not(#b15):not(#b16):not(#b17):not(#b18):not(#b19):not(#b20):not(#b21):not(#b22):not(#b23):not(#b24):not(#b25):not(#b26):not(#b27):not(#b28):not(#b29):not(#b30):not(#b31):not(#b32):not(#b33):not(#b34):not(#b35):not(#b36):not(#b37):not(#b38):not(#b39):not(#b40):not(#b41):not(#b42):not(#b43):not(#b44):not(#b45):not(#b46):not(#b47):not(#b48):not(#b49):not(#b50):not(#b51) body :is(.mt-stage,.mt-soon-it).bn0 .pb{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23F6EFE6'/%3E%3Cstop offset='.55' stop-color='%23E7DBCB'/%3E%3Cstop offset='1' stop-color='%23CDBDA6'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFFFFF'/%3E%3C/svg%3E") center/100% 100% no-repeat!important}
 html:not(#b1):not(#b2):not(#b3):not(#b4):not(#b5):not(#b6):not(#b7):not(#b8):not(#b9):not(#b10):not(#b11):not(#b12):not(#b13):not(#b14):not(#b15):not(#b16):not(#b17):not(#b18):not(#b19):not(#b20):not(#b21):not(#b22):not(#b23):not(#b24):not(#b25):not(#b26):not(#b27):not(#b28):not(#b29):not(#b30):not(#b31):not(#b32):not(#b33):not(#b34):not(#b35):not(#b36):not(#b37):not(#b38):not(#b39):not(#b40):not(#b41):not(#b42):not(#b43):not(#b44):not(#b45):not(#b46):not(#b47):not(#b48):not(#b49):not(#b50):not(#b51) body :is(.mt-stage,.mt-soon-it).bn0 .pb:is(.done,.cur,.jump){background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E") center/100% 100% no-repeat!important;color:#fff!important;--beanmask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E");--beanline:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2.4 -2.4 88.8 72.8'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29' stroke='%23ffffff' stroke-width='2.2' stroke-linejoin='round' paint-order='stroke'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E")}
@@ -7042,6 +7058,25 @@ function weekData(){
     const k=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
     return {n,xp:S.days[k]?.xp||0,today:i===dow,future:i>dow}});
 }
+/* install guidance only where it helps: installed app → share; Android → one-tap install; iPhone browser → 3 Safari steps in a sheet */
+const IS_IOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const IS_MOBILE=IS_IOS||/android/i.test(navigator.userAgent);
+function shareApp(){const url=location.origin+'/'; const d={title:'SáoVoxy',text:'Học tiếng Anh mỗi ngày cùng Sáo',url};
+  if(navigator.share)navigator.share(d).catch(()=>{}); else{try{navigator.clipboard.writeText(url);toast('Đã chép link app')}catch(e){toast(url)}}}
+function installSheet(){const pf=/android/i.test(navigator.userAgent)?'android':'ios';
+  const el=document.createElement('div'); el.className='tsheet';
+  el.innerHTML=`<div class="ts-back"></div><div class="ts-card"><div class="ts-grab"></div><h3 style="margin:4px 0 2px">Cài SáoVoxy ra màn hình chính</h3><p class="muted" style="margin:0 0 6px;font-size:13.5px">Mở nhanh bằng một chạm, toàn màn hình, và Sáo nhắc bạn học mỗi ngày.</p>
+    <ol class="ig-steps ig-simple">${IG_STEPS[pf].slice(pf==='ios'?1:0).map(([ic,t,d],i)=>`<li class="cur"><span class="ig-dot">${IG_ICONS[ic]}</span><div><b>${i+1}. ${t}</b><span>${d}</span></div></li>`).join('')}</ol>
+    <button class="btn primary" id="is-ok" style="width:100%;margin-top:8px">Đã hiểu</button></div>`;
+  document.body.appendChild(el); const close=()=>el.remove(); el.querySelector('.ts-back').onclick=close; el.querySelector('#is-ok').onclick=close}
+function installNudge(v){
+  if(isStandalone()||!IS_MOBILE)return; const started=Object.values(S.rounds||{}).some(r=>r&&r.some&&r.some(Boolean)); if(!started)return;
+  if(S.installLater&&Date.now()-S.installLater<5*864e5)return;
+  const c=document.createElement('section'); c.className='inst-card';
+  c.innerHTML=`<span class="ic-bird">${MASCOT('','happy')}</span><div class="ic-t"><b>Cài SáoVoxy ra màn hình chính</b><span>để Sáo nhắc bạn học mỗi ngày</span></div><div class="ic-act"><button class="btn primary" id="ic-go">${installEvt?'Cài app':'Xem cách cài'}</button><button class="btn ghost" id="ic-later">Để sau</button></div>`;
+  v.prepend(c);
+  $('#ic-go',c).onclick=async()=>{if(installEvt){installEvt.prompt(); await installEvt.userChoice; installEvt=null; c.remove()} else installSheet()};
+  $('#ic-later',c).onclick=()=>{S.installLater=Date.now(); save(); c.remove()}}
 function viewHome(v){
   const d=day(), h=new Date().getHours(), L=levelInfo();
   const hi=h<11?'Chào buổi sáng':h<18?'Chào buổi chiều':'Chào buổi tối';
@@ -7099,6 +7134,7 @@ function viewHome(v){
   $('#wotd-say').onclick=()=>say(w.w+'. '+w.ex); bindShorts(v); loadVOA(v);
   $$('[data-to]',v).forEach(b=>b.onclick=()=>goFocus(b.dataset.to));
   $$('[data-unit]',v).forEach(b=>b.onclick=()=>{const u=UNITS.find(u=>u.id===b.dataset.unit); go('lessons'); runLesson($('#view'),u,nextRound(u))});
+  installNudge(v);
 }
 
 /* ---------- Video ngắn (Sáo Shorts): narrated micro-lessons ---------- */
@@ -8082,7 +8118,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v417';
+const APP_V='elocu-v420';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8197,9 +8233,9 @@ function viewMe(v){
     </section>
     <section class="panel">
       <div class="sec-head" style="margin-bottom:6px"><h2 style="font-size:24px">Cài lên điện thoại</h2></div>
-      ${installed?`<p class="note" style="margin-top:8px"><b>Đã cài.</b> SáoVoxy đang chạy như một ứng dụng riêng trên máy bạn.</p>`:
+      ${installed||!IS_MOBILE?`<div class="setrow"><div class="t"><b>${installed?'✓ Đã cài trên máy này':'Mở trên điện thoại'}</b><span>${installed?'Gửi SáoVoxy cho bạn bè cùng học':'Gửi link để mở SáoVoxy trên điện thoại'}</span></div><button class="btn" id="share-app">${I.share||''} Chia sẻ</button></div>`:
        installEvt?`<div class="setrow"><div class="t"><b>Cài SáoVoxy</b><span>Thêm biểu tượng ra màn hình chính, mở toàn màn hình, dùng được khi mất mạng.</span></div><button class="btn primary" id="install">Cài app</button></div>`:
-       installGuideHTML()}
+       `<div class="setrow"><div class="t"><b>Cài ra màn hình chính</b><span>Mở nhanh bằng một chạm, Sáo nhắc bạn học mỗi ngày</span></div><button class="btn" id="inst-how">Xem cách cài</button></div>`}
       <div class="stack" style="gap:10px;margin-top:8px"><div class="t"><b>Chuyên ngành</b><br><span class="muted" style="font-size:13px">Thêm từ vựng, bài học, bài nghe và tình huống AI riêng cho ngành</span></div><div class="choice" id="track-choice">${trackChoices('data-track')}</div></div>
       <div class="setrow" style="margin-top:6px"><div class="t"><b>Giọng đọc</b><span id="voice-cur">Ưu tiên giọng nữ, tự nhiên, dễ nghe</span></div>
         <div class="row" style="gap:8px;width:100%"><select class="field" id="voice-sel" style="flex:1;min-width:0;padding:10px 12px;font-size:14px"></select><button class="btn" id="voice-test">${I.vol} Nghe thử</button></div></div>
@@ -8230,7 +8266,7 @@ function viewMe(v){
   $('#reset').onclick=()=>confirmSheet({title:'Xóa toàn bộ tiến độ?',body:'XP, chuỗi ngày, huy hiệu và từ vựng đã học trên máy này sẽ bị xóa. Không thể hoàn tác.',ok:'Xóa hết',danger:true,extra:progressSummaryHTML(true),onOk:()=>{try{localStorage.removeItem(KEY)}catch(e){} location.reload()}});
   try{regroupMe(v)}catch(e){console.warn('regroup',e)}
   try{bindAccount(v); const lc=$('.lvl-card',v); lc&&lc.insertAdjacentHTML('beforebegin',`<div class="acct-top">${acctChipHTML()}</div>`); bindAccount(v)}catch(e){}
-  initInstallGuide(v); prettySettings(v);
+  initInstallGuide(v); $('#share-app')&&($('#share-app').onclick=shareApp); $('#inst-how')&&($('#inst-how').onclick=installSheet); prettySettings(v);
 }
 
 /* ---------- Onboarding & placement ---------- */
@@ -8428,19 +8464,19 @@ const CHIRPS=["data:audio/mp4;base64,AAAAHGZ0eXBNNEEgAAACAE00QSBpc29taXNvMgAAAAh
     try{const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u)}catch(e){}
     try{const a=AIV.el||(AIV.el=new Audio()); a.src=typeof SIL!=='undefined'?SIL:''; a.play().catch(()=>{})}catch(e){}
     setTimeout(()=>{if(lastTxt&&el.isConnected)voice(lastTxt,lastWho)},250)};
-  const songLoop=()=>{if(!speaking)chirp(); songTm=setTimeout(songLoop,3500+Math.random()*3500)};
+  const songLoop=()=>{if(!el.isConnected||!songOn)return; if(!speaking)chirp(); songTm=setTimeout(songLoop,3500+Math.random()*3500)};
   const snd=document.createElement('button'); snd.className='fz-snd'; snd.setAttribute('aria-label','Bật tiếng hót'); snd.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="w1" d="M16.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M19 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>';
   el.appendChild(snd);
   const setSong=v=>{songOn=v; if(clip&&!el.classList.contains('clip-loop'))clip.play().catch(()=>{}); snd.classList.toggle('on',v); try{localStorage.setItem('fz.song',v?'1':'0')}catch(e){} clearTimeout(songTm); if(v){try{audioMode&&audioMode('playback')}catch(e){} prime(); unlockVoice(); setTimeout(()=>chirp(3),250); songTm=setTimeout(songLoop,1600)} else pool.forEach(x=>{try{x.pause()}catch(e){}})};
   snd.onclick=e=>{e.stopPropagation(); if(songOn&&!primed){unlock();return} setSong(!songOn); el.classList.remove('need-tap')};
-  let wantSong=true; try{wantSong=localStorage.getItem('fz.song')!=='0'}catch(e){}
+  let wantSong=false; try{wantSong=localStorage.getItem('fz.song')==='1'}catch(e){}
   if(wantSong){songOn=true; snd.classList.add('on'); el.classList.add('need-tap')}
   const EV=['touchend','click','pointerup','keydown'];
   const unlock=()=>{if(!songOn)return; try{audioMode&&audioMode('playback')}catch(e){} prime(); unlockVoice();
     setTimeout(()=>{if(primed){EV.forEach(ev=>document.removeEventListener(ev,unlock,true)); el.classList.remove('need-tap'); clearTimeout(songTm); chirp(3); songTm=setTimeout(songLoop,1600)}},300)};
   EV.forEach(ev=>document.addEventListener(ev,unlock,true));
   /* where autoplay is allowed (desktop), start right away */
-  try{const t=pool[3]; t.muted=false; const pr=t.play(); pr&&pr.then&&pr.then(()=>{primed=true; el.classList.remove('need-tap'); pool.forEach(x=>{if(x!==t){x.muted=true;x.play().then(()=>{x.pause();x.currentTime=0;x.muted=false},()=>{x.muted=false})}}); songTm=setTimeout(songLoop,1800)},()=>{})}catch(e){}
+  if(songOn)try{const t=pool[3]; t.muted=false; const pr=t.play(); pr&&pr.then&&pr.then(()=>{primed=true; el.classList.remove('need-tap'); pool.forEach(x=>{if(x!==t){x.muted=true;x.play().then(()=>{x.pause();x.currentTime=0;x.muted=false},()=>{x.muted=false})}}); songTm=setTimeout(songLoop,1800)},()=>{})}catch(e){}
   let mouthTm=0;
   const talk=txt=>{clearInterval(mouthTm); talking=true; if(mode==='fly'){mode='home';F.hx=P.x<el.clientWidth*.2||P.x>el.clientWidth*.72?el.clientWidth*.45:P.x} else if(mode!=='flip'&&mode!=='home'&&mode!=='peck'&&mode!=='hop'){mode='perch'; modeUntil=performance.now()+400} bird.classList.add('talk'); const shapes=['m-open','m-o','','m-open','m-o','m-open','']; let k=0, n=Math.max(8,Math.round(txt.length*.9));
     mouthTm=setInterval(()=>{bird.classList.remove('m-open','m-o'); const c=shapes[(k+Math.floor(Math.random()*2))%shapes.length]; if(c)bird.classList.add(c); if(++k>n){clearInterval(mouthTm); bird.classList.remove('m-open','m-o','talk'); talking=false}},110)};
@@ -8460,7 +8496,7 @@ const CHIRPS=["data:audio/mp4;base64,AAAAHGZ0eXBNNEEgAAACAE00QSBpc29taXNvMgAAAAh
     const t0=Date.now(), base=who==='s'?2600:1700; voice(txt,who).then(()=>{if(!el.isConnected)return; clearTimeout(tm); tm=setTimeout(step,Math.max(700,base-(Date.now()-t0)))});
     tm=setTimeout(step,base+6500)};
   tm=setTimeout(step,clip?2000:700);
-  const finish=()=>{cancelAnimationFrame(raf); clearTimeout(tm); clearTimeout(songTm); try{pool.forEach(x=>x.pause())}catch(e){} S.introSeen=true; save(); el.classList.add('out'); setTimeout(()=>{el.remove(); done&&done()},420)};
+  const finish=()=>{cancelAnimationFrame(raf); clearTimeout(tm); clearTimeout(songTm); songOn=false; EV.forEach(ev=>document.removeEventListener(ev,unlock,true)); try{pool.forEach(x=>{x.pause();x.src=''})}catch(e){} try{speechSynthesis.cancel()}catch(e){} try{AIV.el&&AIV.el.pause()}catch(e){} try{$$('video',el).forEach(x=>x.pause())}catch(e){} S.introSeen=true; save(); el.classList.add('out'); setTimeout(()=>{el.remove(); done&&done()},420)};
   $('#fz-go',el).onclick=()=>{sfx('tap'); finish()};
   $('#fz-login',el)&&($('#fz-login',el).onclick=()=>{cancelAnimationFrame(raf); clearTimeout(tm); clearTimeout(songTm); try{pool.forEach(x=>x.pause())}catch(e){} S.introSeen=true;S.onboarded=true;save();el.remove();refreshRail();go('home');loginSheet()});
   bird.onclick=()=>{if(!hatched)return; clearTimeout(tm); if(!songOn)setSong(true); if(mode==='perch')takeoff(); setTimeout(step,900)};
