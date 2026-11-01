@@ -2345,6 +2345,7 @@ svg.ph.ln.sv .d2{transform:translate(12%,10%) scale(1)!important}
 .lg-or::before,.lg-or::after{content:"";flex:1;height:1px;background:var(--line-2)}
 .lg-form{display:flex;flex-direction:column;gap:8px}
 .lg-form .btn{justify-content:center}
+.lg-paste{display:flex;flex-direction:column;gap:8px}
 .lg-note{margin:0;font-size:12.5px;color:var(--muted);line-height:1.5}
 
 .acct-chip.on{padding:5px 12px 5px 5px;gap:8px;cursor:pointer}
@@ -8351,7 +8352,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v468';
+const APP_V='elocu-v469';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8912,11 +8913,25 @@ async function loginSheet(){
   try{await sbLoad()}catch(e){note.textContent='Không kết nối được máy chủ tài khoản. Hãy mở app từ link chính thức.';return}
   $('[data-lg="google"]',el).onclick=async()=>{const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:redirect}}); if(error){note.textContent='Đăng nhập Google chưa được bật. Hãy dùng email nhé.'}};
   $('#lg-form',el).onsubmit=async e=>{e.preventDefault(); const em=$('#lg-email',el).value.trim(); if(!em)return; const b=e.submitter; b.disabled=true;
-    const {error}=await sb.auth.signInWithOtp({email:em,options:{emailRedirectTo:redirect}});
+    const app=(()=>{try{return isStandalone()}catch(e){return false}})();
+    const cli=app?(window._sbI||(window._sbI=window.supabase.createClient(SB_URL,SB_KEY,{auth:{flowType:'implicit',persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'sb-implicit'}}))):sb;
+    const {error}=await cli.auth.signInWithOtp({email:em,options:{emailRedirectTo:redirect}});
     b.disabled=false; if(error){note.textContent='Chưa gửi được: '+error.message;return}
-    note.innerHTML=`Đã gửi link tới <b>${esc(em)}</b>. Mở email trên máy này và bấm vào link để đăng nhập.`; sfx('right')};
+    if(!app){note.innerHTML=`Đã gửi link tới <b>${esc(em)}</b>. Mở email trên máy này và bấm vào link để đăng nhập.`; sfx('right'); return}
+    note.innerHTML=`Đã gửi email tới <b>${esc(em)}</b>.<br><b>Đừng bấm vào link</b> (sẽ mở Safari). Hãy <b>nhấn giữ</b> nút đăng nhập trong email → <b>Sao chép liên kết</b>, rồi quay lại đây bấm nút bên dưới.`;
+    if(!$('#lg-paste',el)){note.insertAdjacentHTML('afterend',`<div class="lg-paste" id="lg-paste"><button class="btn primary" type="button" id="lg-pbtn">Dán link & đăng nhập</button><input class="field" id="lg-pin" placeholder="…hoặc dán link vào đây" autocomplete="off"></div>`);
+      const go_=async raw=>{const tk=lgParseLink(raw); if(!tk){note.innerHTML='Chưa thấy link đăng nhập hợp lệ. Hãy nhấn giữ nút trong email → <b>Sao chép liên kết</b> rồi thử lại.';return}
+        note.textContent='Đang đăng nhập…'; const {error:e2}=await sb.auth.verifyOtp({token_hash:tk.token,type:tk.type});
+        if(e2){note.textContent='Link đã hết hạn hoặc đã dùng rồi. Bấm "Gửi link đăng nhập" để nhận link mới.';return}
+        sfx('right'); toast('Đã đăng nhập'); close()};
+      $('#lg-pbtn',el).onclick=async()=>{let t=''; try{t=await navigator.clipboard.readText()}catch(e){} if(t)go_(t); else {$('#lg-pin',el).focus(); note.innerHTML='Hãy dán link vào ô bên dưới (nhấn giữ → Dán).'}};
+      $('#lg-pin',el).addEventListener('input',e=>{if(e.target.value.length>20)go_(e.target.value)})}
+    sfx('right')};
 }
 
+function lgParseLink(raw){let u=String(raw||'').trim(); for(let i=0;i<4;i++){try{const d=decodeURIComponent(u); if(d===u)break; u=d}catch(e){break}}
+  const m=u.match(/[?&#]token=([A-Za-z0-9_\-.]+)/); if(!m)return null; const t=(u.match(/[?&#]type=(\w+)/)||[])[1]||'magiclink';
+  return {token:m[1],type:({signup:'signup',magiclink:'magiclink',invite:'invite',recovery:'recovery',email_change:'email_change'})[t]||'email'}}
 /* ---------- Server push (Supabase edge function) ---------- */
 const PUSH_FN=SB_URL+'/functions/v1/push';
 const b64u=s=>{const p='='.repeat((4-s.length%4)%4), b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/')); return Uint8Array.from(b,c=>c.charCodeAt(0))};
@@ -8945,7 +8960,7 @@ syncReminder=function(){_syncReminder(); pushSync()};
 const _saveLocal=save;
 save=function(){if(!sbApplying)S._t=Date.now(); _saveLocal(); sbPush()};
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')sbPull(false)});
-if(!inClaude) sbLoad().then(()=>sb.auth.getSession()).then(({data})=>{sbUser=data?.session?.user||null; if(sbUser){sbPull(true); setTimeout(adoptAcctName,1200)} refreshAccountUI(); if(route==='home')go('home',true)}).catch(()=>{});
+if(!inClaude) sbLoad().then(async()=>{const h=new URLSearchParams(location.hash.slice(1)); if(h.get('access_token')&&h.get('refresh_token')){try{await sb.auth.setSession({access_token:h.get('access_token'),refresh_token:h.get('refresh_token')}); history.replaceState(null,'',location.pathname+'#me')}catch(e){}} return sb.auth.getSession()}).then(({data})=>{sbUser=data?.session?.user||null; if(sbUser){sbPull(true); setTimeout(adoptAcctName,1200)} refreshAccountUI(); if(route==='home')go('home',true)}).catch(()=>{});
 
 document.addEventListener('click',e=>{const t=e.target.closest('.js-theme'); if(t){toggleTheme();return} const bl=e.target.closest('.js-bell,.js-gear'); if(bl)go('me')}); lastLvl=levelInfo().code;
 $('#pitch-logo').innerHTML=LOGO; $('.pitch').innerHTML=$('.pitch').innerHTML.replace('{ICON_SPEAK}',I.speak).replace('{ICON_TALK}',I.talk).replace('{ICON_LISTEN}',I.listen).replace('{ICON_TROPHY}',I.trophy);
