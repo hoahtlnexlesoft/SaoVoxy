@@ -8369,7 +8369,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v474';
+const APP_V='elocu-v475';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8939,6 +8939,7 @@ async function loginSheet(){
     if(error&&/invalid login/i.test(error.message||'')){
       const r=await sb.auth.signUp({email:em,password:pw,options:{emailRedirectTo:redirect}});
       if(r.error){sendB.disabled=false; note.innerHTML=/already|registered/i.test(r.error.message||'')?'Sai mật khẩu. Kiểm tra lại nhé.':'Chưa tạo được tài khoản: '+esc(r.error.message); return}
+      if(r.data.user&&Array.isArray(r.data.user.identities)&&r.data.user.identities.length===0){sendB.disabled=false; note.innerHTML='Email này đã có tài khoản nhưng <b>sai mật khẩu</b>. Hãy nhập đúng mật khẩu bạn đã đặt trước đây.'; return}
       if(!r.data.session){sendB.disabled=false; note.textContent='Đã tạo tài khoản nhưng hệ thống đang bắt xác nhận email. Hãy báo quản trị tắt "Confirm email".'; return}
       error=null}
     sendB.disabled=false;
