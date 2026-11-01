@@ -6718,7 +6718,7 @@ function sayLib(text,rate,g){const fb=()=>g===SAYGEN?sayDevice(text,rate):Promis
   return new Promise(res=>{try{aiStop(); try{speechSynthesis.cancel()}catch(e){}
     const a=AIV.el||(AIV.el=new Audio()); a.muted=false; a.volume=1; a.src='/v/'+h+'.m4a?r=3'; a.preservesPitch=true; a.playbackRate=Math.max(.5,Math.min(1.5,(rate??S.rate??1)));
     let ok=false; a.onplaying=()=>{ok=true; ttsOK=true}; a.onended=()=>res(); a.onerror=()=>{if(g!==SAYGEN)return res(); VLIB.bad++; res(fb())};
-    const p=a.play(); p&&p.catch&&p.catch(()=>{if(!ok)res(fb())})}catch(e){res(fb())}})}
+    const p=a.play(); p&&p.catch&&p.catch(()=>{if(!ok)res(fb())}); setTimeout(()=>{if(!ok&&g===SAYGEN){try{a.pause()}catch(e){} VLIB.bad++; res(fb())}},1600)}catch(e){res(fb())}})}
 /* decide synchronously so playback starts inside the tap (iOS drops audio started after an await) */
 function say(text,rate){
   try{stopRec(true)}catch(e){} audioMode('playback');
@@ -8372,7 +8372,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v476';
+const APP_V='elocu-v477';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
