@@ -8360,7 +8360,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v471';
+const APP_V='elocu-v472';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
@@ -8924,7 +8924,7 @@ async function loginSheet(){
     const app=(()=>{try{return isStandalone()}catch(e){return false}})();
     const cli=app?(window._sbI||(window._sbI=window.supabase.createClient(SB_URL,SB_KEY,{auth:{flowType:'implicit',persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'sb-implicit'}}))):sb;
     const {error}=await cli.auth.signInWithOtp({email:em,options:{emailRedirectTo:redirect}});
-    if(error){const m=(error.message||'').match(/after (\d+) second/); if(m){let n=+m[1]; note.innerHTML='Vừa gửi link rồi, đợi một chút để gửi lại nhé. Nếu đã nhận email, hãy dùng link trong email đó.'; const lb=b.textContent; const tick=()=>{if(n<=0){b.disabled=false;b.textContent=lb;return} b.textContent='Gửi lại sau '+n+' giây'; n--; setTimeout(tick,1000)}; tick(); if(app)showPaste(); return} b.disabled=false; note.textContent='Chưa gửi được: '+error.message;return}
+    if(error){const m=(error.message||'').match(/after (\d+) second/); if(m){let n=+m[1]; note.innerHTML='Vừa gửi link rồi, đợi một chút để gửi lại nhé. Nếu đã nhận email, hãy dùng link trong email đó.'; const lb=b.textContent; const tick=()=>{if(n<=0){b.disabled=false;b.textContent=lb;return} b.textContent='Gửi lại sau '+n+' giây'; n--; setTimeout(tick,1000)}; tick(); if(app)showPaste(); return} b.disabled=false; note.innerHTML=/rate limit/i.test(error.message||'')?'Hệ thống đã gửi quá nhiều email trong giờ này. Hãy dùng link trong email đã nhận, hoặc thử lại sau khoảng 1 giờ.':'Chưa gửi được: '+esc(error.message||'');return}
     b.disabled=false;
     if(!app){note.innerHTML=`Đã gửi link tới <b>${esc(em)}</b>. Mở email trên máy này và bấm vào link để đăng nhập.`; sfx('right'); return}
     note.innerHTML=`Đã gửi email tới <b>${esc(em)}</b>.<br><b>Đừng bấm vào link</b> (sẽ mở Safari). Hãy <b>nhấn giữ</b> nút đăng nhập trong email → <b>Sao chép liên kết</b>, rồi quay lại đây bấm nút bên dưới.`;
