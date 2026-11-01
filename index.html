@@ -5568,8 +5568,8 @@ let VOCAB = [
 
 let SOUNDS = [
   {id:'ii', glyph:'iː · ɪ', name:'I dài và I ngắn', tip:'/iː/ kéo dài, căng môi như đang cười. /ɪ/ ngắn và thả lỏng, miệng hơi mở hơn, nghe gần với "ê" nhẹ. Người Việt hay đọc cả hai thành "i".',
-    pairs:[['sheep','ʃiːp','ship','ʃɪp'],['leave','liːv','live','lɪv'],['seat','siːt','sit','sɪt'],['feel','fiːl','fill','fɪl']],
-    sents:['Please sit in this seat.','Did he leave, or does he still live here?','I feel the cup is too full to fill.']},
+    pairs:[['sheep','ʃiːp','ship','ʃɪp'],['beat','biːt','bit','bɪt'],['seat','siːt','sit','sɪt'],['feel','fiːl','fill','fɪl']],
+    sents:['Please sit in this seat.','Did he leave, or does he still live here?','Sit here and feel the sea breeze.']},
   {id:'th', glyph:'θ · ð', name:'Âm TH', tip:'Đặt đầu lưỡi nhẹ giữa hai hàm răng rồi đẩy hơi ra. /θ/ không rung (think), /ð/ có rung (this). Đừng đọc thành "th" hay "đ" tiếng Việt.',
     pairs:[['think','θɪŋk','sink','sɪŋk'],['three','θriː','tree','triː'],['thank','θæŋk','tank','tæŋk'],['they','ðeɪ','day','deɪ']],
     sents:['I think three thousand is enough.','They thought the weather was better there.','Thank you for this thoughtful gift.']},
@@ -5589,8 +5589,8 @@ let SOUNDS = [
     pairs:[['light','laɪt','night','naɪt'],['low','loʊ','no','noʊ'],['lock','lɑːk','knock','nɑːk'],['lame','leɪm','name','neɪm']],
     sents:['Leave the light on all night.','No one knows how long it will last.','Nine lovely lanterns lit the lane.']},
   {id:'rl', glyph:'r · l', name:'R và L', tip:'/r/ tiếng Anh: cong lưỡi về sau, không chạm vòm miệng, môi hơi tròn. Không đọc như "r", "d" hay "gi" tiếng Việt.',
-    pairs:[['right','raɪt','light','laɪt'],['read','riːd','lead','liːd'],['row','roʊ','low','loʊ'],['pray','preɪ','play','pleɪ']],
-    sents:['The red lorry turned right at the light.','Really, I love reading long letters.','Rain rarely ruins our river trips.']},
+    pairs:[['right','raɪt','light','laɪt'],['rock','rɑːk','lock','lɑːk'],['fry','fraɪ','fly','flaɪ'],['pray','preɪ','play','pleɪ']],
+    sents:['The red truck turned right at the light.','Really, I love reading long letters.','Rain rarely ruins our river trips.']},
   {id:'uu', glyph:'uː · ʊ', name:'U dài và U ngắn', tip:'/uː/ tròn môi, kéo dài như "u" giữ lâu (food). /ʊ/ ngắn, môi thả lỏng hơn, nghe gần "ư-u" lướt nhanh (book). Người Việt hay đọc cả hai thành "u".',
     pairs:[['pool','puːl','pull','pʊl'],['fool','fuːl','full','fʊl'],['Luke','luːk','look','lʊk'],['suit','suːt','soot','sʊt']],
     sents:['Look at the full moon over the pool.','Could you put the food in the cooler?','Luke took a good book to school.']},
@@ -5604,7 +5604,7 @@ let SOUNDS = [
     pairs:[['jet','dʒet','yet','jet'],['jam','dʒæm','yam','jæm'],['jello','ˈdʒeloʊ','yellow','ˈjeloʊ'],['joke','dʒoʊk','yolk','joʊk']],
     sents:['Just enjoy the jam and the juice.','Have you worn your yellow jacket yet?','John told a funny joke in June.']},
   {id:'eror', glyph:'ɝː · ɔːr', name:'ER và OR', tip:'/ɝː/ môi hơi tròn, lưỡi cong về sau, giữ một âm "ơ-r" (bird). /ɔːr/ môi tròn hơn, bắt đầu như "o" rồi cong lưỡi (board).',
-    pairs:[['bird','bɝːd','board','bɔːrd'],['work','wɝːk','walk','wɔːk'],['fur','fɝː','for','fɔːr'],['shirt','ʃɝːt','short','ʃɔːrt']],
+    pairs:[['bird','bɝːd','board','bɔːrd'],['word','wɝːd','ward','wɔːrd'],['fur','fɝː','for','fɔːr'],['shirt','ʃɝːt','short','ʃɔːrt']],
     sents:['The girl wore a short purple shirt.','I walk to work early in the morning.','Her third word was forty.']},
   {id:'eie', glyph:'eɪ · e', name:'EI và E', tip:'/eɪ/ là nguyên âm đôi: bắt đầu bằng "ê" rồi lướt lên "i" (late). /e/ là một âm ngắn, không lướt (let).',
     pairs:[['late','leɪt','let','let'],['pain','peɪn','pen','pen'],['wait','weɪt','wet','wet'],['sale','seɪl','sell','sel']],
@@ -5925,7 +5925,7 @@ const TRACKS={
       qs:[['How many phases does a moisturizer start with?',['One','Two','Three'],1],
           ['What holds the oil and water droplets together?',['The fragrance','The emulsifier','The preservative'],1],
           ['When are heat-sensitive ingredients added?',['Before heating','At seventy-five degrees','After the mixture cools below forty degrees'],2]]},
-    sound:{id:'trk-cosmo',glyph:'ʃən',name:'Từ chuyên ngành hóa',tile:'t-pink',tip:'Đuôi -tion, -sion đọc là /ʃən/ (“shần”), không đọc “ti-ôn”. Nhấn đúng âm tiết: “eMULsion”, “visCOsity”, “TItration”. Đuôi -ist đọc rõ /ɪst/ có âm /t/ cuối.',
+    sound:{id:'trk-cosmo',glyph:'ʃən',name:'Từ chuyên ngành hóa',tile:'t-pink',tip:'Đuôi -tion, -sion đọc là /ʃən/ (“shần”), không đọc “ti-ôn”. Nhấn đúng âm tiết: “eMULsion”, “visCOsity”, “tiTRAtion”. Đuôi -ist đọc rõ /ɪst/ có âm /t/ cuối.',
       pairs:[['emulsion','ɪˈmʌl.ʃən','emulsifier','ɪˈmʌl.sə.faɪ.ɚ'],['viscosity','vɪˈskɑː.sə.t̬i','surfactant','sɚˈfæk.tənt'],['catalyst','ˈkæt̬.əl.ɪst','titration','taɪˈtreɪ.ʃən'],['humectant','hjuːˈmek.tənt','dermatologist','ˌdɝː.məˈtɑː.lə.dʒɪst']],
       sents:['Heat the oil phase to seventy-five degrees.','The emulsion separated after two weeks.','Please check the safety data sheet first.']},
     scen:[
@@ -5982,7 +5982,7 @@ const PACKS_RAW=[
   ['postpone','/poʊstˈpoʊn/','v.','hoãn lại','The launch was postponed until May.'],
   ['remind','/rɪˈmaɪnd/','v.','nhắc nhở','Please remind me to call the client.'],
   ['request','/rɪˈkwest/','n./v.','yêu cầu','I sent a request for more information.'],
-  ['update','/ʌpˈdeɪt/','n./v.','cập nhật','I\'ll send you an update by noon.'],
+  ['update','/ˈʌp.deɪt/','n./v.','cập nhật','I\'ll send you an update by noon.'],
   ['feedback','/ˈfiːd.bæk/','n.','phản hồi, góp ý','Thanks for the helpful feedback.'],
   ['task','/tæsk/','n.','nhiệm vụ','I have three tasks to finish today.'],
   ['responsible','/rɪˈspɑːn.sə.bəl/','adj.','chịu trách nhiệm','Who is responsible for the budget?'],
@@ -7166,7 +7166,7 @@ const SHORTS=[
    {k:'title',vi:'Âm cuối quyết định nghĩa của từ. “book” khác “books”!'},
    {k:'say',en:'books',ipa:'/bʊks/',vi:'Nghe rõ âm /s/ ở cuối.'},
    {k:'say',en:'She likes cats.',ipa:'/laɪks/ · /kæts/',vi:'Hai âm /s/ cuối đều phải bật ra.'},
-   {k:'say',en:'dogs and birds',ipa:'/dɒɡz/ · /bɜːdz/',vi:'Sau âm hữu thanh, “s” đọc thành /z/.'}],
+   {k:'say',en:'dogs and birds',ipa:'/dɑːɡz/ · /bɝːdz/',vi:'Sau âm hữu thanh, “s” đọc thành /z/.'}],
   q:['Từ nào kết thúc bằng âm /z/?',['cats','dogs','books'],1]},
  {id:'look',tag:'Cụm động từ',title:'look for · look after · look up',g:['#FF8A3D','#FF4F8B'],mood:'spy',sc:[
    {k:'title',vi:'Cùng là “look”, đi với giới từ khác nhau thì nghĩa khác hẳn.'},
@@ -8135,7 +8135,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v421';
+const APP_V='elocu-v422';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
