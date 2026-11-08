@@ -5,13 +5,16 @@ const VOICES = new Set(['Kore', 'Aoede', 'Zephyr', 'Puck', 'Charon', 'Leda', 'Ca
 const MODELS = () => [...new Set([process.env.GEMINI_TTS_MODEL, 'gemini-3.1-flash-tts-preview', 'gemini-2.5-flash-preview-tts', 'gemini-2.5-flash-tts'].filter(Boolean))];
 
 function loud(pcm) {
-  // normalise 16-bit PCM so every sentence plays at the same, clear level (peak ≈ 92%)
-  let peak = 1;
-  for (let i = 0; i + 1 < pcm.length; i += 2) { const v = Math.abs(pcm.readInt16LE(i)); if (v > peak) peak = v; }
-  const g = Math.min(4, (32767 * 0.92) / peak);
-  if (g <= 1.02) return pcm;
+  // speech-gated RMS normalisation to ≈ -16 dBFS (same level as the pre-recorded /v/ clips) + soft limiter,
+  // so every sentence plays at the same perceived loudness
+  const n = pcm.length >> 1; if (!n) return pcm;
+  let peak = 1; for (let i = 0; i < n; i++) { const v = Math.abs(pcm.readInt16LE(i * 2)); if (v > peak) peak = v; }
+  const gate = peak * 0.08; let sum = 0, cnt = 0;
+  for (let i = 0; i < n; i++) { const v = pcm.readInt16LE(i * 2); if (Math.abs(v) > gate) { const x = v / 32768; sum += x * x; cnt++; } }
+  const rms = Math.sqrt(sum / Math.max(1, cnt)) || 1e-4;
+  const g = Math.max(0.25, Math.min(8, 0.158 / rms));
   const out = Buffer.alloc(pcm.length);
-  for (let i = 0; i + 1 < pcm.length; i += 2) out.writeInt16LE(Math.max(-32768, Math.min(32767, Math.round(pcm.readInt16LE(i) * g))), i);
+  for (let i = 0; i < n; i++) { const v = pcm.readInt16LE(i * 2) / 32768 * g; const y = Math.abs(v) < 0.8 ? v : Math.sign(v) * (0.8 + 0.19 * Math.tanh((Math.abs(v) - 0.8) / 0.19)); out.writeInt16LE(Math.round(y * 32767), i * 2); }
   return out;
 }
 function louder(pcm) {
