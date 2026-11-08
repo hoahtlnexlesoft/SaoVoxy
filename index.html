@@ -5463,6 +5463,32 @@ html[data-palette="vivid"]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6)
 html:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7):not(#f8):not(#f9):not(#f10):not(#f11):not(#f12):not(#f13):not(#f14):not(#f15):not(#f16):not(#f17):not(#f18):not(#f19):not(#f20) body .screen .opts.fl-opts{display:flex!important;flex-direction:column!important;gap:12px!important}
 html:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7):not(#f8):not(#f9):not(#f10):not(#f11):not(#f12):not(#f13):not(#f14):not(#f15):not(#f16):not(#f17):not(#f18):not(#f19):not(#f20) body .screen .opts.fl-opts .opt{width:100%!important;text-align:center!important;font-size:18px!important;padding:16px!important}
 
+/* ===== Stage complete party ===== */
+.sp-party{position:absolute;inset:0;z-index:90;display:grid;place-items:center;padding:20px;animation:fadeIn .25s both}
+.sp-party.out{animation:fadeOut .3s both}
+.spp-back{position:absolute;inset:0;background:rgba(16,18,26,.42)}
+.spp-burst{position:absolute;left:50%;top:42%;width:0;height:0;pointer-events:none;z-index:2}
+.spp-burst i{position:absolute;width:10px;height:14px;border-radius:3px;background:var(--c);transform:rotate(var(--a)) translateY(0) scale(var(--s));opacity:0;animation:sppBit 1.4s cubic-bezier(.15,.8,.3,1) var(--d) forwards}
+.spp-burst i:nth-child(3n){border-radius:50%;width:9px;height:9px}
+@keyframes sppBit{0%{opacity:1;transform:rotate(var(--a)) translateY(0) scale(var(--s))}70%{opacity:1}100%{opacity:0;transform:rotate(var(--a)) translateY(calc(var(--dist) * -1)) rotate(260deg) scale(var(--s))}}
+.spp-card{position:relative;z-index:1;width:min(100%,330px);padding:84px 22px 22px;border-radius:30px;background:var(--surface);text-align:center;box-shadow:0 30px 60px -24px rgba(0,0,0,.5);animation:sppIn .55s cubic-bezier(.3,1.5,.5,1) both;overflow:visible}
+@keyframes sppIn{0%{transform:translateY(40px) scale(.8);opacity:0}100%{transform:none;opacity:1}}
+.spp-rays{position:absolute;left:50%;top:6px;width:220px;height:220px;margin-left:-110px;margin-top:-120px;border-radius:50%;background:repeating-conic-gradient(rgba(255,212,94,.45) 0 10deg,transparent 10deg 24deg);-webkit-mask:radial-gradient(circle,#000 30%,transparent 68%);mask:radial-gradient(circle,#000 30%,transparent 68%);animation:sppSpin 9s linear infinite;pointer-events:none}
+@keyframes sppSpin{to{transform:rotate(360deg)}}
+.spp-bird{position:absolute;left:50%;top:-78px;width:150px;height:150px;margin-left:-75px;animation:sppPop .9s cubic-bezier(.25,1.6,.45,1) .1s both}
+.spp-bird svg{width:100%;height:100%;animation:sppHop 1.1s ease-in-out 1s infinite}
+@keyframes sppPop{0%{transform:translateY(90px) scale(.2) rotate(-20deg);opacity:0}60%{opacity:1}100%{transform:none;opacity:1}}
+@keyframes sppHop{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-14px) rotate(-6deg)}50%{transform:translateY(0) rotate(0)}75%{transform:translateY(-8px) rotate(6deg)}}
+.spp-stars{display:flex;justify-content:center;gap:6px;margin-bottom:6px}
+.spp-stars b{font-size:26px;color:#FFC93C;text-shadow:0 2px 0 #E9A512;animation:sppStar .5s cubic-bezier(.3,1.8,.5,1) both}
+.spp-stars b:nth-child(1){animation-delay:.5s}.spp-stars b:nth-child(2){animation-delay:.65s;font-size:32px;margin-top:-6px}.spp-stars b:nth-child(3){animation-delay:.8s}
+@keyframes sppStar{0%{transform:scale(0) rotate(-90deg)}100%{transform:none}}
+.spp-card small{display:block;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.spp-card h2{margin:4px 0 6px;font-size:28px}
+.spp-card p{margin:0 0 18px;color:var(--muted);font-size:15px;line-height:1.5}
+.spp-card p b{color:var(--fg)}
+.spp-card .btn{width:100%}
+
 /* ===== One bean per stage: đậu đỏ, đậu xanh, đậu ngự, đậu cô ve, đậu Hà Lan ===== */
 html:not(#b1):not(#b2):not(#b3):not(#b4):not(#b5):not(#b6):not(#b7):not(#b8):not(#b9):not(#b10):not(#b11):not(#b12):not(#b13):not(#b14):not(#b15):not(#b16):not(#b17):not(#b18):not(#b19):not(#b20):not(#b21):not(#b22):not(#b23):not(#b24):not(#b25):not(#b26):not(#b27):not(#b28):not(#b29):not(#b30):not(#b31):not(#b32):not(#b33):not(#b34):not(#b35):not(#b36):not(#b37):not(#b38):not(#b39):not(#b40):not(#b41):not(#b42):not(#b43):not(#b44):not(#b45):not(#b46):not(#b47):not(#b48):not(#b49):not(#b50):not(#b51) body :is(.mt-stage,.mt-soon-it).bn0 .pb{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23F6EFE6'/%3E%3Cstop offset='.55' stop-color='%23E7DBCB'/%3E%3Cstop offset='1' stop-color='%23CDBDA6'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFFFFF'/%3E%3C/svg%3E") center/100% 100% no-repeat!important}
 html:not(#b1):not(#b2):not(#b3):not(#b4):not(#b5):not(#b6):not(#b7):not(#b8):not(#b9):not(#b10):not(#b11):not(#b12):not(#b13):not(#b14):not(#b15):not(#b16):not(#b17):not(#b18):not(#b19):not(#b20):not(#b21):not(#b22):not(#b23):not(#b24):not(#b25):not(#b26):not(#b27):not(#b28):not(#b29):not(#b30):not(#b31):not(#b32):not(#b33):not(#b34):not(#b35):not(#b36):not(#b37):not(#b38):not(#b39):not(#b40):not(#b41):not(#b42):not(#b43):not(#b44):not(#b45):not(#b46):not(#b47):not(#b48):not(#b49):not(#b50):not(#b51) body :is(.mt-stage,.mt-soon-it).bn0 .pb:is(.done,.cur,.jump){background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E") center/100% 100% no-repeat!important;color:#fff!important;--beanmask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 68'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E");--beanline:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2.4 -2.4 88.8 72.8'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.32' r='.85'%3E%3Cstop offset='0' stop-color='%23D9434F'/%3E%3Cstop offset='.55' stop-color='%23A8202F'/%3E%3Cstop offset='1' stop-color='%23701320'/%3E%3C/radialGradient%3E%3CradialGradient id='h' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M7 37C6 22 19 13 34 14C41 14.5 45 18.5 51 18.5C57 18.5 61 13.5 69 15.5C79 18 81 34 75 44C67 56 47 59 30 57C16 55 7.5 49 7 37Z' fill='url%28%23g%29' stroke='%23ffffff' stroke-width='2.2' stroke-linejoin='round' paint-order='stroke'/%3E%3Cellipse cx='26' cy='28' rx='12' ry='6' transform='rotate%28-22 26 28%29' fill='url%28%23h%29'/%3E%3Cellipse cx='51' cy='21.6' rx='6.2' ry='1.7' fill='%23FFF8F0'/%3E%3C/svg%3E")}
@@ -6865,6 +6891,9 @@ function sfx(kind){
     else if(kind==='tap'){note(660,0,.05,'sine',.35)}
     else if(kind==='select'){note(700,0,.07,'sine',.5,990);note(1480,.035,.08,'sine',.14)}
     else if(kind==='tick'){note(1250,0,.035,'sine',.16)}
+    else if(kind==='party'){const C=[523.3,659.3,784,1046.5,784,1046.5,1318.5,1568];C.forEach((f,i)=>note(f,i*.11,.22,'square',.18));C.forEach((f,i)=>note(f,i*.11,.26,'triangle',.55));
+      [130.8,196,261.6,196].forEach((f,i)=>note(f,i*.22,.24,'triangle',.5));note(220,.95,.35,'sine',.5,880);
+      [2093,2637,3136,2637,3520].forEach((f,i)=>note(f,1.0+i*.06,.18,'sine',.16));note(1046.5,1.32,.7,'triangle',.5);note(1318.5,1.32,.7,'triangle',.45);note(1568,1.32,.8,'triangle',.45)}
     else if(kind==='level'){[392,523.3,659.3,784,1046.5,1318.5].forEach((f,i)=>note(f,i*.08,.3,'triangle',.6))}
   }catch(e){}
 }
@@ -8072,6 +8101,24 @@ function PHOENIX(){return `<svg class="phx" viewBox="0 0 120 140" aria-hidden="t
 <path d="M55 58l5 8 5-8z" fill="#FFD23F" stroke="#E8A21A" stroke-width="1.2" stroke-linejoin="round"/>
 <ellipse cx="38" cy="60" rx="5" ry="3" fill="#FF6F8E" opacity=".45"/><ellipse cx="82" cy="60" rx="5" ry="3" fill="#FF6F8E" opacity=".45"/>
 <path d="M52 112v10M68 112v10M48 124h8M64 124h8" stroke="#E8A21A" stroke-width="3" stroke-linecap="round"/></svg>`}
+
+/* ---------- Stage complete: Sáo pops out to celebrate ---------- */
+function stageParty(st){
+  const host=$('#screen')||document.body; const el=document.createElement('div'); el.className='sp-party';
+  const bits=Array.from({length:44},(_,i)=>`<i style="--a:${(i*41)%360}deg;--dist:${120+(i*29)%170}px;--d:${(i%9)*.035}s;--c:${['#FFD45E','#FF8FB8','#7CCBEA','#9ED486','#B7A4FF','#FFB27A'][i%6]};--s:${.6+(i%4)*.25}"></i>`).join('');
+  el.innerHTML=`<div class="spp-back"></div><div class="spp-burst" aria-hidden="true">${bits}</div>
+    <div class="spp-card" role="dialog" aria-label="Hoàn thành chặng"><div class="spp-rays" aria-hidden="true"></div>
+      <span class="spp-bird">${MASCOT('','cheer')}</span>
+      <div class="spp-stars" aria-hidden="true"><b>★</b><b>★</b><b>★</b></div>
+      <small>Hoàn thành chặng ${st.no}</small><h2>Chúc mừng bạn!</h2>
+      <p>${st.name?`Bạn đã chinh phục <b>${esc(st.name)}</b>. `:''}Sáo tự hào về bạn lắm! 🎉</p>
+      <button class="btn primary" id="spp-ok">Tuyệt vời!</button></div>`;
+  host.appendChild(el); sfx('party');
+  try{if(typeof CHIRPS!=='undefined'&&CHIRPS.length&&S.sfx!==false){[0,420,900].forEach((t,i)=>setTimeout(()=>{const a=new Audio(CHIRPS[i%CHIRPS.length]); a.volume=.55; a.play().catch(()=>{})},t+250))}}catch(e){}
+  try{navigator.vibrate&&navigator.vibrate([30,60,30])}catch(e){}
+  const close=()=>{el.classList.add('out'); setTimeout(()=>el.remove(),300)};
+  el.querySelector('#spp-ok').onclick=close; el.querySelector('.spp-back').onclick=close;
+}
 function runLesson(v,u,round=0){
   v.classList.remove('me-sub','pg-in'); if(round>=0&&u&&u.id&&UNITS.some(x=>x.id===u.id)){S.lastUnit=u.id; save()}
   let k=0,correct=0; const t0=Date.now(); const ex=round<0?u.ex:roundExercises(u,round);
@@ -8207,7 +8254,10 @@ function runLesson(v,u,round=0){
   const finish=()=>{
     if(u.onDone)return u.onDone(v,correct,ex.length);
     let first=false, nxt=-1;
+    let stageWon=null; const stDone=g=>g.units.length&&g.units.every(x=>!roundsOf(x).includes(false));
+    const myStage=(()=>{try{return pathStages().find(g=>g.units.some(x=>x.id===u.id))}catch(e){return null}})(); const wasDone=myStage?stDone(myStage):true;
     if(u.id!=='review'&&!u.ai){const rd=roundsOf(u); first=!rd[round]; rd[round]=true; S.units[u.id]=rd.filter(Boolean).length; nxt=rd.indexOf(false)}
+    if(myStage&&!wasDone&&stDone(myStage)){const all=pathStages(); const ix=all.findIndex(g=>g.units.some(x=>x.id===u.id)); stageWon={no:ix+1,name:myStage.name||myStage.title||''}}
     day().lesson++; save(); const bonus=u.id==='review'?10:u.ai?10:first?15:5; addXP(bonus);
     const acc=ex.length?Math.round(correct/ex.length*100):0, secs=Math.max(1,Math.round((Date.now()-t0)/1000));
     const perfect=correct===ex.length;
@@ -8234,6 +8284,7 @@ function runLesson(v,u,round=0){
       <button id="f-back" hidden></button>
     </div>`;
     $('#f-again').onclick=()=>runLesson(v,u,round); $('#f-back').onclick=()=>go('lessons'); $('#f-x').onclick=()=>go('lessons'); $('#f-out')&&($('#f-out').onclick=()=>go('lessons'));
+    if(stageWon)setTimeout(()=>stageParty(stageWon),650);
     $('#f-next').onclick=()=>{if(u.id!=='review'&&nxt>=0)runLesson(v,u,nxt); else if(u.id!=='review'&&nu)runLesson(v,nu,nextRound(nu)); else go('lessons')};
   };
   step();
@@ -8416,7 +8467,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v478';
+const APP_V='elocu-v479';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
