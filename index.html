@@ -8050,38 +8050,44 @@ function TAM_SCENE(kind){
   const sh=(w=26,x=60)=>`<ellipse class="sc-sh" cx="${x}" cy="105" rx="${w}" ry="5.6" fill="#2B1F5E" opacity=".09"/>`;
   const star=(x,y,r,c='#FFC93C',cls='sc-tw')=>`<path class="${cls}" style="transform-origin:${x}px ${y}px" d="M${x} ${y-r}q${r*.18} ${r*.82} ${r} ${r}q-${r*.82} ${r*.18}-${r} ${r}q-${r*.18}-${r*.82}-${r}-${r}q${r*.82}-${r*.18} ${r}-${r}z" fill="${c}"/>`;
   /* eyes */
-  const eO=(x,y,dx=0,dy=0)=>`<g class="sc-pu"><ellipse cx="${x+dx}" cy="${y+dy}" rx="3" ry="3.8" fill="${INK}"/><circle cx="${x+dx-1}" cy="${y+dy-1.3}" r="1.15" fill="#fff"/></g>`;
-  const eH=(x,y)=>`<path d="M${x-3.6} ${y+1.2}q3.6-5 7.2 0" fill="none" stroke="${INK}" stroke-width="2.2" stroke-linecap="round"/>`;
-  const eS=(x,y)=>`<path d="M${x-3.4} ${y}q3.4 3 6.8 0" fill="none" stroke="${INK}" stroke-width="2.2" stroke-linecap="round"/>`;
-  const eW=(x,y)=>`<path d="M${x-3.4} ${y+.6}h6.8" stroke="${INK}" stroke-width="2.2" stroke-linecap="round"/>`;
-  const mouth=(m,y=57)=>m==='o'?`<ellipse cx="60" cy="${y+.6}" rx="2.2" ry="2.6" fill="#B8434A"/>`
+  const ex=x=>x<60?x-1.4:x+1.4;
+  const eO=(x,y,dx=0,dy=0)=>{x=ex(x);y+=1;return `<g class="sc-pu"><ellipse cx="${x+dx}" cy="${y+dy}" rx="3.5" ry="4.4" fill="${INK}"/><ellipse cx="${x+dx}" cy="${y+dy+1.8}" rx="2.4" ry="1.8" fill="#6A3E46" opacity=".75"/><circle cx="${x+dx-1.1}" cy="${y+dy-1.6}" r="1.45" fill="#fff"/><circle cx="${x+dx+1.3}" cy="${y+dy+1.4}" r=".7" fill="#fff"/></g><path d="M${x+(x<60?-4.2:4.2)} ${y-3}l${x<60?-1.6:1.6} -1.2" stroke="${INK}" stroke-width="1.3" stroke-linecap="round"/>`};
+  const eH=(x,y)=>{x=ex(x);y+=1;return `<path d="M${x-3.8} ${y+1.4}q3.8-5.4 7.6 0" fill="none" stroke="${INK}" stroke-width="2.3" stroke-linecap="round"/>`};
+  const eS=(x,y)=>{x=ex(x);y+=1;return `<path d="M${x-3.8} ${y-.4}q3.8 3.6 7.6 0" fill="none" stroke="${INK}" stroke-width="2.3" stroke-linecap="round"/><path d="M${x+(x<60?-3.8:3.8)} ${y-.4}l${x<60?-1.4:1.4} -.8" stroke="${INK}" stroke-width="1.2" stroke-linecap="round"/>`};
+  const eW=(x,y)=>{x=ex(x);y+=1;return `<path d="M${x-3.6} ${y+.4}q3.6-2.4 7.2 0" fill="none" stroke="${INK}" stroke-width="2.3" stroke-linecap="round"/>`};
+  const mouth=(m,y=58.4)=>m==='o'?`<ellipse cx="60" cy="${y+.6}" rx="2.2" ry="2.6" fill="#B8434A"/>`
     :m==='open'?`<path d="M56 ${y-.6}q4 6 8 0z" fill="#B8434A"/><path d="M57.4 ${y+1.6}q2.6 1.6 5.2 0" stroke="#F58A94" stroke-width="1.4" fill="none" stroke-linecap="round"/>`
     :m==='smirk'?`<path d="M57 ${y}q3.4 2 6.6-1.4" fill="none" stroke="#B8434A" stroke-width="1.8" stroke-linecap="round"/>`
     :`<path d="M57 ${y-.4}q3 2.8 6 0" fill="none" stroke="#B8434A" stroke-width="1.8" stroke-linecap="round"/>`;
-  /* head: khăn vấn tròn đỏ-cam, tóc đen mái lệch, búi thấp */
+  /* head: big round chibi face, khăn vấn quấn xoắn đỏ-cam, mái tóc mềm, búi thấp */
   const head=(e1,e2,m='smile',brow='')=>`<g class="tm-head">`
-    +`<circle cx="79.6" cy="58.4" r="6" fill="${HR}"/>`
-    +`<path d="M39 48c-1.6 7 0 13.4 3.6 16.4 1.6-4.4 1.6-9 .4-13.4zM81 48c1.6 7 0 13.4-3.6 16.4-1.6-4.4-1.6-9-.4-13.4z" fill="${HR}"/>`
-    +`<ellipse cx="60" cy="48.6" rx="19.6" ry="18.2" fill="${SK}"/>`
-    +`<path d="M40.4 50c-.6-8 3-14 9-16.6 5.4-1.4 11-1 16 .8 6.4 2.2 12 7.4 14.2 15.4-3.6-4-7.6-6.4-12-7.4 1 1.8 1.4 3.6 1.2 5.6-4-4.4-9.6-7-15.6-7.6-5.4 1.6-9.6 4.6-12.8 9.8z" fill="${HR}"/>`
-    +`<path d="M33.6 38.4c0-8.6 11.8-15 26.4-15s26.4 6.4 26.4 15c0 4.2-2.4 6.8-5.6 7.2-5.4-4-12.8-6.2-20.8-6.2s-15.4 2.2-20.8 6.2c-3.2-.4-5.6-3-5.6-7.2z" fill="${KV}"/>`
-    +`<path d="M36.8 36.4c5.6-5 13.6-7.6 23.2-7.6s17.6 2.6 23.2 7.6" fill="none" stroke="${KV2}" stroke-width="4.2" stroke-linecap="round"/>`
-    +`<path d="M36 42c6-4.8 14.4-7.2 24-7.2s18 2.4 24 7.2" fill="none" stroke="${KV3}" stroke-width="2" stroke-linecap="round" opacity=".7"/>`
-    +`<path d="M45 27.4c4-2 9.4-3.2 14.6-3.4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".35"/>`
-    +e1+e2+brow+mouth(m)
-    +`<ellipse cx="47.4" cy="55" rx="4" ry="2.4" fill="#FF8C9C" opacity=".55"/><ellipse cx="72.6" cy="55" rx="4" ry="2.4" fill="#FF8C9C" opacity=".55"/></g>`;
-  /* body: áo tứ thân hồng, yếm cam đỏ, lớp kem, dải lưng đỏ thắt nơ, váy đen */
-  const body=(seat=0)=>`<g fill="#D9434A"><ellipse cx="53.4" cy="102" rx="4.6" ry="2.6"/><ellipse cx="66.6" cy="102" rx="4.6" ry="2.6"/></g><path d="M50 101.2h7M63 101.2h7" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>`
-    +`<path d="M47.6 90h24.8l2 10.6c-4.8 1-9.6 1.4-14.4 1.4s-9.6-.4-14.4-1.4z" fill="${SK_D}"/>`
-    +`<path d="M56 62h8v4.4c-2.6 1.4-5.4 1.4-8 0z" fill="${SK2}"/>`
-    +`<path d="M44.6 71.6c0-6.4 6.4-9.4 15.4-9.4s15.4 3 15.4 9.4l3 23.4c-5.8 1.6-12 2.2-18.4 2.2s-12.6-.6-18.4-2.2z" fill="${AO}"/>`
-    +`<path d="M52 63.8L60 80l8-16.2c-2.6-.6-5.2-.8-8-.8s-5.4.2-8 .8z" fill="#F6E6CC"/><path d="M54.4 64.4L60 74.6l5.6-10.2c-1.8-.4-3.8-.6-5.6-.6s-3.8.2-5.6.6z" fill="${YM}"/>`
-    +`<path d="M52 63.8L60 80M68 63.8L60 80" stroke="${AO2}" stroke-width="2" stroke-linecap="round"/>`
-    +`<path d="M45.6 79.6h28.8l.5 4.8H45.1z" fill="${SA}"/><path d="M60 82l-6.4-3.8v7.6zM60 82l6.4-3.8v7.6z" fill="${SA}"/><path d="M58.6 83.6l-3.4 11 3.4-1.6zM61.4 83.6l3.4 11-3.4-1.6z" fill="${SA}"/><circle cx="60" cy="82" r="2.4" fill="#B82E33"/>`;
+    +`<circle cx="79.8" cy="60.4" r="6.4" fill="${HR}"/><path d="M76.6 57.4c2-.8 4.6-.6 6.2.8" stroke="#4A3A40" stroke-width="1.2" fill="none" stroke-linecap="round"/>`
+    +`<path d="M37.4 46c-2.4 8.6-.8 16.4 4.6 20.4 1-5.4.4-10.8-1.6-15.4zM82.6 46c2.4 8.6.8 16.4-4.6 20.4-1-5.4-.4-10.8 1.6-15.4z" fill="${HR}"/>`
+    +`<ellipse cx="60" cy="48.6" rx="21.4" ry="19.6" fill="${SK}"/>`
+    
+    +`<path d="M39.2 52c-.8-8.6 3.8-15.4 11-17.6 3.8-1.2 7.2-1 9.8.4-2 5.4-6.6 9.6-13 12-3 1.2-5.8 2.8-7.8 5.2zM80.8 52c.8-8.6-3.8-15.4-11-17.6-3.8-1.2-7.2-1-9.8.4 2 5.4 6.6 9.6 13 12 3 1.2 5.8 2.8 7.8 5.2z" fill="${HR}"/>`
+    +`<path d="M47 40.6c3.4-1.4 6.6-3.6 9-6.4M73 40.6c-3.4-1.4-6.6-3.6-9-6.4" stroke="#55444B" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".8"/>`
+    +`<path d="M32.6 38c0-10 12.2-17 27.4-17s27.4 7 27.4 17c0 4.8-2.6 7.8-6 8.4-5.6-4.6-13-7-21.4-7s-15.8 2.4-21.4 7c-3.4-.6-6-3.6-6-8.4z" fill="${KV}"/>`
+    +`<clipPath id="tkv${TAM_SCENE.k=(TAM_SCENE.k||0)+1}"><path d="M32.6 38c0-10 12.2-17 27.4-17s27.4 7 27.4 17c0 4.8-2.6 7.8-6 8.4-5.6-4.6-13-7-21.4-7s-15.8 2.4-21.4 7c-3.4-.6-6-3.6-6-8.4z"/></clipPath>`
+    +`<g clip-path="url(#tkv${TAM_SCENE.k})" fill="none" stroke-linecap="round"><path d="M31 37.6c7.4-7 17.4-10.4 29-10.4s21.6 3.4 29 10.4" stroke="${KV2}" stroke-width="5.6"/><path d="M31 31.6c7.4-6 17.4-9 29-9s21.6 3 29 9M31 43c7.4-6.8 17.4-10 29-10s21.6 3.2 29 10" stroke="${KV3}" stroke-width="1.3" opacity=".45"/><path d="M41 33.8l3.4 4.4M51 30.6l2.6 4.8M61 29.6l1.8 5M71 30.8l1 5M80.4 34.4l.2 4.6" stroke="#E0782E" stroke-width="1.6" opacity=".9"/></g>`
+    +`<path d="M38.4 44.8c6.2-4.6 13.6-7 21.6-7s15.4 2.4 21.6 7" fill="none" stroke="${KV3}" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>`
+    +`<path d="M44 26.6c4.4-2.4 9.6-3.6 15.2-3.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".4"/>`
+    +e1+e2+brow+`<path d="M59.4 54.4q.6.6 1.2 0" stroke="#E0A88A" stroke-width="1.2" fill="none" stroke-linecap="round"/>`+mouth(m)
+    +`<ellipse cx="45.6" cy="56.2" rx="4.4" ry="2.6" fill="#FF8C9C" opacity=".5"/><ellipse cx="74.4" cy="56.2" rx="4.4" ry="2.6" fill="#FF8C9C" opacity=".5"/></g>`;
+  /* body: áo tứ thân hồng xoè nhẹ, cổ giao kem, yếm cam đỏ, dải lưng đỏ thắt nơ dài, váy đen, giày đỏ */
+  const body=(seat=0)=>`<g fill="#D9434A"><path d="M48.6 101.4c0-2 2.2-3.2 5-3.2s4.6 1.2 4.6 3.2-2 2.4-4.8 2.4-4.8-.4-4.8-2.4zM61.8 101.4c0-2 1.8-3.2 4.6-3.2s5 1.2 5 3.2-2 2.4-4.8 2.4-4.8-.4-4.8-2.4z"/></g>`
+    +`<path d="M48 92h24l1.6 8.4c-4.4.8-9 1.2-13.6 1.2s-9.2-.4-13.6-1.2z" fill="${SK_D}"/>`
+    +`<path d="M45.4 70.6c0-5.6 6.2-8.8 14.6-8.8s14.6 3.2 14.6 8.8l4.4 24c-5.8 1.8-12.2 2.6-19 2.6s-13.2-.8-19-2.6z" fill="${AO}"/>`
+    +`<path d="M66 64.4c4.4 1.4 8 3.6 8.6 6.2l4.4 24c-2.4.8-5 1.4-7.6 1.8z" fill="${AO2}" opacity=".35"/>`
+    +`<path d="M52.4 62.8L60 79l7.6-16.2c-2.4-.6-5-1-7.6-1s-5.2.4-7.6 1z" fill="#F7E8D0"/><path d="M55 63.2L60 72.4l5-9.2c-1.6-.4-3.2-.6-5-.6s-3.4.2-5 .6z" fill="${YM}"/>`
+    +`<path d="M51.6 63L60 80.4M68.4 63L60 80.4" stroke="${AO2}" stroke-width="2.6" stroke-linecap="round"/><path d="M60 80.4l-6.8 15.4M60 80.4l6.8 15.4" stroke="${AO2}" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>`
+    +`<path d="M46.6 79.4c8.8 1.4 18 1.4 26.8 0l.6 4.6c-9.4 1.6-18.6 1.6-28 0z" fill="${SA}"/>`
+    +`<path d="M60 82.2c-3-3.4-7.6-4.8-9.4-2.8-1.4 1.8.6 5.4 3.6 5.8 2 .2 4-.8 5.8-3zM60 82.2c3-3.4 7.6-4.8 9.4-2.8 1.4 1.8-.6 5.4-3.6 5.8-2 .2-4-.8-5.8-3z" fill="${SA}"/><path d="M58.6 83.4c-1.6 4-3.4 8.4-5.8 12.6l3.2-.6 1.2 2.4c1.4-4.6 2.2-9.4 2.4-14zM61.4 83.4c1.6 4 3.4 8.4 5.8 12.6l-3.2-.6-1.2 2.4c-1.4-4.6-2.2-9.4-2.4-14z" fill="#C23137"/><ellipse cx="60" cy="82.4" rx="2.4" ry="2.2" fill="#B02A30"/>`;
   /* arm: sleeve from shoulder to hand, wrapped in an animatable group */
-  const arm=(sx,sy,hx,hy,cls='',extra='')=>`<g class="${cls}" style="transform-origin:${sx}px ${sy}px"><path d="M${sx} ${sy}L${hx} ${hy}" stroke="${AO}" stroke-width="7.4" stroke-linecap="round"/><path d="M${sx} ${sy}L${hx} ${hy}" stroke="${AO2}" stroke-width="7.4" stroke-linecap="round" stroke-dasharray="0 ${Math.hypot(hx-sx,hy-sy)-3} 3 99" opacity=".5"/><circle cx="${hx}" cy="${hy}" r="3.9" fill="${SK}"/>${extra}</g>`;
+  const arm=(sx,sy,hx,hy,cls='',extra='')=>{const d=Math.hypot(hx-sx,hy-sy), ux=(hx-sx)/d, uy=(hy-sy)/d, cx=hx-ux*4.2, cy=hy-uy*4.2;
+    return `<g class="${cls}" style="transform-origin:${sx}px ${sy}px"><path d="M${sx} ${sy}L${cx} ${cy}" stroke="${AO2}" stroke-width="9.4" stroke-linecap="round"/><path d="M${sx} ${sy}L${cx-ux*.6} ${cy-uy*.6}" stroke="${AO}" stroke-width="7.4" stroke-linecap="round"/><path d="M${cx-uy*4} ${cy+ux*4}L${cx+uy*4} ${cy-ux*4}" stroke="${AO2}" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="${hx}" cy="${hy}" rx="3.8" ry="3.6" fill="${SK}"/>${extra}</g>`};
   const L=(hx=41,hy=84,c='',x='')=>arm(47,67,hx,hy,c,x), R=(hx=79,hy=84,c='',x='')=>arm(73,67,hx,hy,c,x);
-  const tam=(e1,e2,m,armsBack='',armsFront='',brow='')=>armsBack+body()+armsFront+head(e1,e2,m,brow);
+  const tam=(e1,e2,m,armsBack='',armsFront='',brow='')=>body()+armsBack+armsFront+head(e1,e2,m,brow);
   let g='';
   switch(kind){
   case 'mirror': /* soi gương chải tóc */
@@ -8690,7 +8696,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v483';
+const APP_V='elocu-v484';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
