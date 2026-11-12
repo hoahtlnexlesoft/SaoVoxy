@@ -5592,24 +5592,15 @@ html[data-palette="vivid"] .sp2-ok{background:linear-gradient(150deg,#FFD45E,#F5
 .pb-mate .tam-fig.flip{transform:scaleX(-1)}
 .pb-mate .tam-img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%;filter:drop-shadow(0 5px 5px rgba(60,30,40,.12));-webkit-user-drag:none;user-select:none;animation:tamBob 3s ease-in-out infinite}
 .pb-mate.mr .tam-img{animation-delay:-1.4s}
-.pb-mate .tm-noi{animation:tamSing 1.6s ease-in-out infinite}
-.pb-mate .tm-nghe{animation:tamSway 2.4s ease-in-out infinite;transform-origin:50% 90%}
-.pb-mate .tm-choi{animation:tamStrum .9s ease-in-out infinite}
-.pb-mate .tm-doc{animation:tamRead 3.2s ease-in-out infinite;transform-origin:40% 100%}
-.pb-mate .tm-viet{animation:tamWrite 1.4s ease-in-out infinite}
-.pb-mate .tm-di{animation:tamHop 1.5s cubic-bezier(.3,.7,.4,1) infinite}
-@keyframes tamBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-@keyframes tamSing{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-4px) rotate(-2deg)}50%{transform:translateY(0) rotate(0)}75%{transform:translateY(-4px) rotate(2deg)}}
-@keyframes tamSway{0%,100%{transform:rotate(-3.5deg)}50%{transform:rotate(3.5deg)}}
-@keyframes tamStrum{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-5px) scale(1.01,.99)}60%{transform:translateY(0) scale(1.02,.98)}}
-@keyframes tamRead{0%,40%,100%{transform:rotate(0)}55%,85%{transform:rotate(2.6deg) translateY(1px)}}
-@keyframes tamWrite{0%,100%{transform:translate(0,0)}20%{transform:translate(1.5px,1px)}40%{transform:translate(-1px,1.5px)}60%{transform:translate(1.5px,1px)}80%{transform:translate(0,0)}}
-@keyframes tamHop{0%,100%{transform:translateY(0) scale(1,1)}10%{transform:translateY(0) scale(1.05,.93)}35%{transform:translateY(-14px) scale(.97,1.04)}55%{transform:translateY(0) scale(1.04,.95)}70%{transform:translateY(0) scale(1,1)}}
-.pb-mate .tfx{position:absolute;top:2px;font-style:normal;font-weight:900;font-size:17px;line-height:1;color:#E0577A;opacity:0;pointer-events:none;animation:tamFx 2.8s ease-out infinite}
+.pb-mate .tam-img{animation:tamBreath 3.6s ease-in-out infinite}
+.pb-mate .tm-noi,.pb-mate .tm-choi,.pb-mate .tm-di{animation:tamBreath 3.6s ease-in-out infinite,tamPop 6s ease-in-out infinite}
+@keyframes tamBreath{0%,100%{scale:1 1}50%{scale:1.012 1.022}}
+@keyframes tamPop{0%,84%,100%{translate:0 0}89%{translate:0 -5px}93%{translate:0 0}96%{translate:0 -2px}}
+.pb-mate .tfx{position:absolute;top:6px;font-style:normal;font-weight:800;font-size:14px;line-height:1;color:#E58AA0;opacity:0;pointer-events:none;animation:tamFx 4.2s ease-out infinite}
 .pb-mate.ml .tfx{right:-8px}.pb-mate.mr .tfx{left:-8px}
-.pb-mate .tfx1{top:20px;font-size:13px;color:#F2A33A;animation-delay:1.4s}
+.pb-mate .tfx1{top:22px;font-size:11px;color:#EDB25A;animation-delay:2.1s}
 .pb-mate.ml .tfx1{right:-18px}.pb-mate.mr .tfx1{left:-18px}
-@keyframes tamFx{0%{opacity:0;transform:translateY(8px) scale(.6) rotate(-10deg)}20%{opacity:1}70%{opacity:.9}100%{opacity:0;transform:translateY(-22px) scale(1.1) rotate(12deg)}}
+@keyframes tamFx{0%{opacity:0;transform:translateY(6px)}25%{opacity:.85}75%{opacity:.6}100%{opacity:0;transform:translateY(-16px)}}
 .pb-mate.grey .tam-img{animation:none}.pb-mate.grey .tfx{display:none}
 /* cô Tấm vẽ SVG đứng hai bên đường học */
 .tam-scene .tm-bob{animation:scBob 2.8s ease-in-out infinite}
@@ -8759,7 +8750,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v492';
+const APP_V='elocu-v493';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
