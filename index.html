@@ -8206,7 +8206,8 @@ function TAM_SCENE(kind){
   return W(g)}
 
 const TAM_IMG={speak:'noi',potion:'noi',book:'doc',read:'doc',write:'viet',study:'viet',music:'nghe',gem:'nghe',flap:'choi',eat:'choi',snack:'choi',globe:'di',sly:'di',mirror:'di'};
-function TAM_PIC(kind){const f=TAM_IMG[kind]||'noi';return `<img class="tam-img tm-${f}" src="media/tam-${f}.webp" alt="" draggable="false" loading="lazy">`}
+const TAM_SRC={doc:'media/tam-doc.webp',viet:'media/tam-viet.webp',noi:'media/tam-noi.webp',nghe:'media/tam-nghe.webp',choi:'media/tam-choi.webp',di:'media/tam-di.webp'};
+function TAM_PIC(kind){const f=TAM_IMG[kind]||'noi';return `<img class="tam-img tm-${f}" src="${TAM_SRC[f]}" alt="" draggable="false">`}
 /* Duolingo-style: every stage has its own colour, every round its own icon */
 const STAGE_COL=['--sc:#8A72F5;--sc2:#C3B5FF;--scd:#6650D6','--sc:#F06A97;--sc2:#FFB3CD;--scd:#C94A76','--sc:#3FAEF0;--sc2:#9AD8FF;--scd:#1F87C8','--sc:#FF9952;--sc2:#FFCBA3;--scd:#D9752F','--sc:#34C7A0;--sc2:#97EBD3;--scd:#1F9E7C','--sc:#F5B92E;--sc2:#FFE39A;--scd:#C9920B'];
 const ROUND_IC=['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.4C10.1 5 7.6 4.4 4.6 4.6 3.7 4.7 3 5.4 3 6.3v10.9c0 1 .8 1.7 1.8 1.6 2.7-.1 5 .5 7.2 1.9z" fill="currentColor" stroke="none"/><path d="M12 6.4c1.9-1.4 4.4-2 7.4-1.8.9.1 1.6.8 1.6 1.7v10.9c0 1-.8 1.7-1.8 1.6-2.7-.1-5 .5-7.2 1.9z" fill="currentColor" stroke="none" opacity=".62"/><path d="M14.6 9.4c1.2-.4 2.5-.6 3.9-.5M14.6 12.6c1.2-.4 2.5-.6 3.9-.5" stroke-width="1.6"/></svg>','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path fill-rule="evenodd" d="M12 2.4a3.6 3.6 0 0 1 3.6 3.6v5.2a3.6 3.6 0 0 1-7.2 0V6A3.6 3.6 0 0 1 12 2.4zM10.6 6.6h2.8M10.6 9.4h2.8" fill="currentColor" stroke="none"/><path d="M5.4 11.2a6.6 6.6 0 0 0 13.2 0M12 17.8v3.4M9 21.2h6"/></svg>','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 14.6v-2.2a7.8 7.8 0 0 1 15.6 0v2.2"/><rect x="2.6" y="13" width="5.6" height="8.2" rx="2.6" fill="currentColor" stroke="none"/><rect x="15.8" y="13" width="5.6" height="8.2" rx="2.6" fill="currentColor" stroke="none"/></svg>'];
@@ -8739,7 +8740,7 @@ async function enableReminders(){
     if(!st||st.state==='granted')await swReg.periodicSync.register('daily-reminder',{minInterval:3*3600e3})}}catch(e){}
   syncReminder(); scheduleInPage(); return true;
 }
-const APP_V='elocu-v488';
+const APP_V='elocu-v489';
 let _upBusy=0;
 async function checkUpdate(){
   if(_upBusy||!navigator.onLine)return; _upBusy=1;
